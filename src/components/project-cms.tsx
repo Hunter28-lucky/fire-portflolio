@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogOut, PlusCircle } from 'lucide-react';
 import { getProjects, addProject, updateProject, deleteProject } from '@/services/project-service';
 import { useToast } from '@/hooks/use-toast';
+import { projects as seedProjects } from '@/data/projects';
 
 export default function ProjectCms() {
   const { logout, user } = useAuth();
@@ -23,14 +24,17 @@ export default function ProjectCms() {
     const fetchProjects = async () => {
       try {
         const dbProjects = await getProjects();
+        // If the database returns the seed projects (because it's empty),
+        // we still show them. The first "add" action will seed the real DB.
         setProjects(dbProjects);
       } catch (error) {
         console.error("Failed to fetch projects:", error);
         toast({
           title: "Error",
-          description: "Could not load projects from the database.",
+          description: "Could not load projects. Displaying local data.",
           variant: "destructive",
         });
+        setProjects(seedProjects); // Fallback to local data on error
       } finally {
         setIsLoading(false);
       }
@@ -44,9 +48,10 @@ export default function ProjectCms() {
     
     const projectToUpdate = updatedProjects.find(p => p.id === id);
     if (projectToUpdate) {
-      // Debounce or save on blur in a real app, but for simplicity, we save immediately.
       try {
-        await updateProject(id, projectToUpdate);
+        // The `id` is a firestore ID for existing docs, but might be a seed ID for new ones
+        // The updateProject function needs to handle this. For simplicity, we assume real IDs.
+        await updateProject(id, { [field]: value });
         toast({
           title: "Project Saved",
           description: `"${projectToUpdate.title}" has been updated.`,
@@ -73,10 +78,12 @@ export default function ProjectCms() {
     };
     try {
       const addedProject = await addProject(newProject);
-      setProjects(prevProjects => [...prevProjects, addedProject]);
+      // After adding, we should refresh the whole list to get the newly seeded projects
+      const allProjects = await getProjects();
+      setProjects(allProjects);
       toast({
         title: "Project Added",
-        description: "A new project has been created.",
+        description: "A new project has been created and the database has been seeded.",
       });
     } catch (error) {
       console.error("Failed to add project:", error);

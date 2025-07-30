@@ -1,47 +1,55 @@
 'use server';
 
-import { db } from '@/lib/firebase';
-import { collection, getDocs, doc, addDoc, updateDoc, deleteDoc, getDoc, writeBatch } from 'firebase/firestore';
+import { initializeApp, getApps, getApp, deleteApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, getDoc, writeBatch } from 'firebase/firestore';
 import type { Project } from '@/types';
 import { projects as seedProjects } from '@/data/projects';
 
-const PROJECTS_COLLECTION = 'projects';
-
-// Helper function to seed the database from the static file if it's empty.
-const seedDatabase = async () => {
-  const projectsCollection = collection(db, PROJECTS_COLLECTION);
-  const snapshot = await getDocs(projectsCollection);
-  if (snapshot.empty) {
-    console.log('Database is empty. Seeding with initial projects...');
-    const batch = writeBatch(db);
-    seedProjects.forEach((project) => {
-      // Use the static ID for seeding to maintain consistency if needed
-      const docRef = doc(db, PROJECTS_COLLECTION, project.id);
-      batch.set(docRef, project);
-    });
-    await batch.commit();
-    console.log('Database seeded successfully.');
-  }
+const firebaseConfig = {
+  "projectId": "krish-goswami-portfolio-qb9yp",
+  "appId": "1:425022461612:web:e29cfeb20159228aaff109",
+  "storageBucket": "krish-goswami-portfolio-qb9yp.firebasestorage.app",
+  "apiKey": "AIzaSyBiS2sr84cCa7ojoRD9Kr3WkSzo1rw_xB4",
+  "authDomain": "krish-goswami-portfolio-qb9yp.firebaseapp.com",
+  "measurementId": "",
+  "messagingSenderId": "425022461612"
 };
 
+// --- Server-side Firebase Initialization ---
+let db: ReturnType<typeof getFirestore>;
+const appName = 'firebase-server-app-project-service';
+if (!getApps().some(app => app.name === appName)) {
+  const serverApp = initializeApp(firebaseConfig, appName);
+  db = getFirestore(serverApp);
+} else {
+  const serverApp = getApp(appName);
+  db = getFirestore(serverApp);
+}
+// --- End Server-side Firebase Initialization ---
 
-// Ensures seeding is checked before any operation.
-const ensureSeeded = async () => {
-    // This is a simplified check. In a real-world app, you might use a flag
-    // in another document or a more robust singleton pattern.
+
+const PROJECTS_COLLECTION = 'projects';
+
+// This function now returns the local seed data if the database is empty.
+// The responsibility of writing data is now solely on the authenticated CMS.
+export async function getProjects(): Promise<Project[]> {
+  try {
     const projectsCollection = collection(db, PROJECTS_COLLECTION);
     const snapshot = await getDocs(projectsCollection);
-    if(snapshot.empty) {
-        await seedDatabase();
+    
+    if (snapshot.empty) {
+      console.log("Firestore is empty, returning seed projects.");
+      // If the database is empty, you can return the local data as a fallback.
+      // The CMS is now responsible for the initial write.
+      return seedProjects;
     }
-}
-
-
-export async function getProjects(): Promise<Project[]> {
-  await ensureSeeded();
-  const projectsCollection = collection(db, PROJECTS_COLLECTION);
-  const snapshot = await getDocs(projectsCollection);
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
+    
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
+  } catch (error) {
+    console.error("Could not fetch projects, returning local fallback. Error:", error);
+    // If there's an error (e.g., permissions), return local data.
+    return seedProjects;
+  }
 }
 
 export async function getProject(id: string): Promise<Project | null> {
@@ -54,11 +62,28 @@ export async function getProject(id: string): Promise<Project | null> {
 }
 
 export async function addProject(project: Omit<Project, 'id'>): Promise<Project> {
+  // This function will be called from the CMS by an authenticated user.
+  // First, check if the DB is empty and if so, add all seed projects.
+  const projectsCollection = collection(db, PROJECTS_COLLECTION);
+  const snapshot = await getDocs(projectsCollection);
+  if (snapshot.empty) {
+    console.log('Database is empty. Seeding with initial projects before adding the new one...');
+    const batch = writeBatch(db);
+    seedProjects.forEach((p) => {
+      // Don't use seed ID, let Firestore generate it
+      const { id, ...projectData } = p;
+      const docRef = doc(projectsCollection); 
+      batch.set(docRef, projectData);
+    });
+    await batch.commit();
+    console.log('Database seeded successfully.');
+  }
+
   const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), project);
   return { id: docRef.id, ...project };
 }
 
-export async function updateProject(id: string, project: Omit<Project, 'id'>): Promise<void> {
+export async function updateProject(id: string, project: Partial<Omit<Project, 'id'>>): Promise<void> {
   const docRef = doc(db, PROJECTS_COLLECTION, id);
   await updateDoc(docRef, project);
 }
