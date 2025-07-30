@@ -22,10 +22,9 @@ export default function ProjectCms() {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setIsLoading(true);
       try {
         const dbProjects = await getProjects();
-        // If the database returns the seed projects (because it's empty),
-        // we still show them. The first "add" action will seed the real DB.
         setProjects(dbProjects);
       } catch (error) {
         console.error("Failed to fetch projects:", error);
@@ -39,8 +38,10 @@ export default function ProjectCms() {
         setIsLoading(false);
       }
     };
-    fetchProjects();
-  }, [toast]);
+    if (user) {
+      fetchProjects();
+    }
+  }, [toast, user]);
 
   const handleProjectChange = async (id: string, field: keyof Omit<Project, 'id'>, value: string | string[]) => {
     const updatedProjects = projects.map(p => p.id === id ? { ...p, [field]: value } : p);
@@ -49,8 +50,6 @@ export default function ProjectCms() {
     const projectToUpdate = updatedProjects.find(p => p.id === id);
     if (projectToUpdate) {
       try {
-        // The `id` is a firestore ID for existing docs, but might be a seed ID for new ones
-        // The updateProject function needs to handle this. For simplicity, we assume real IDs.
         await updateProject(id, { [field]: value });
         toast({
           title: "Project Saved",
@@ -78,12 +77,10 @@ export default function ProjectCms() {
     };
     try {
       const addedProject = await addProject(newProject);
-      // After adding, we should refresh the whole list to get the newly seeded projects
-      const allProjects = await getProjects();
-      setProjects(allProjects);
+      setProjects(prevProjects => [...prevProjects, addedProject]);
       toast({
         title: "Project Added",
-        description: "A new project has been created and the database has been seeded.",
+        description: "A new project has been created.",
       });
     } catch (error) {
       console.error("Failed to add project:", error);

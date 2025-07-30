@@ -1,10 +1,8 @@
 'use server';
 
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, writeBatch } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, writeBatch, getDoc } from 'firebase/firestore';
 import type { Project } from '@/types';
-// We use the client instance here because this service will now also be used by client components.
-// Firebase handles the context switching automatically.
-import { db } from '@/lib/firebase/client';
+import { db } from '@/lib/firebase/server';
 import { projects as seedProjects } from '@/data/projects';
 
 const PROJECTS_COLLECTION = 'projects';
@@ -15,46 +13,48 @@ export async function getProjects(): Promise<Project[]> {
     const snapshot = await getDocs(projectsCollection);
     
     if (snapshot.empty) {
-      console.log("Firestore is empty, returning seed projects as fallback.");
+      console.log("Firestore is empty, returning seed projects.");
       return seedProjects;
     }
     
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
   } catch (error) {
     console.error("Could not fetch projects, returning local fallback. Error:", error);
-    // If there is a permission error on the client, it's better to show local data than nothing.
     return seedProjects;
   }
 }
 
 export async function addProject(project: Omit<Project, 'id'>): Promise<Project> {
-  const projectsCollection = collection(db, PROJECTS_COLLECTION);
-  const snapshot = await getDocs(projectsCollection);
+    const projectsCollectionRef = collection(db, PROJECTS_COLLECTION);
+    const snapshot = await getDocs(projectsCollectionRef);
 
-  // This check is to see if this is the very first project being added.
-  // If so, we seed the database with all the local projects first.
-  if (snapshot.empty) {
-    console.log('Database is empty. Seeding with initial projects...');
-    const batch = writeBatch(db);
-    seedProjects.forEach((p) => {
-      // Use the seed ID if it exists, otherwise let Firestore generate one
-      const docRef = p.id ? doc(projectsCollection, p.id) : doc(projectsCollection);
-      const { id, ...projectData } = p;
-      batch.set(docRef, projectData);
-    });
-    await batch.commit();
-    console.log('Database seeded successfully.');
-     const newDocRef = await addDoc(projectsCollection, project);
-     return { id: newDocRef.id, ...project };
-  } else {
-     const docRef = await addDoc(projectsCollection, project);
-     return { id: docRef.id, ...project };
-  }
+    if (snapshot.empty) {
+        console.log('Database is empty. Seeding with initial projects...');
+        const batch = writeBatch(db);
+        seedProjects.forEach(p => {
+            const { id, ...projectData } = p;
+            const docRef = doc(projectsCollectionRef, id);
+            batch.set(docRef, projectData);
+        });
+        await batch.commit();
+        console.log('Database seeded successfully.');
+    }
+
+    const docRef = await addDoc(projectsCollectionRef, project);
+    return { id: docRef.id, ...project };
 }
 
 export async function updateProject(id: string, project: Partial<Omit<Project, 'id'>>): Promise<void> {
   const docRef = doc(db, PROJECTS_COLLECTION, id);
-  await updateDoc(docRef, project);
+  // Check if the document exists before updating, to prevent errors.
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    await updateDoc(docRef, project);
+  } else {
+    console.warn(`Attempted to update non-existent project with id: ${id}`);
+    // Optionally, you could create it here if that's the desired behavior
+    // await setDoc(docRef, project, { merge: true });
+  }
 }
 
 export async function deleteProject(id: string): Promise<void> {
