@@ -1,4 +1,6 @@
 import AudioPlayer from '@/components/audio-player';
+import Footer from '@/components/footer';
+import GithubSection from '@/components/github-section';
 import HeroSection from '@/components/hero-section';
 import MobileCta from '@/components/mobile-cta';
 import PortfolioSection from '@/components/portfolio-section';
@@ -11,11 +13,8 @@ export default function Home() {
         <HeroSection />
         <SplineSection />
         <PortfolioSection />
-        <footer className="mt-16 w-full p-8 text-center text-muted-foreground">
-          <p>
-            &copy; {new Date().getFullYear()} Krish Goswami. All rights reserved.
-          </p>
-        </footer>
+        <GithubSection />
+        <Footer />
       </main>
       <AudioPlayer />
       <MobileCta />
