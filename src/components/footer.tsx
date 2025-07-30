@@ -1,5 +1,6 @@
 import { Button } from './ui/button';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -45,7 +46,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-white/10 pt-8">
           <p>
-            &copy; {new Date().getFullYear()} Krish Goswami. All rights reserved.
+            &copy; {new Date().getFullYear()} Krish Goswami. All rights reserved. | <Link href="/admin" className="hover:text-primary">Admin</Link>
           </p>
         </div>
       </div>
