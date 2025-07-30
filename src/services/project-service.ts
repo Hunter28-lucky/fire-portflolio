@@ -1,24 +1,11 @@
 'use server';
 
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, getDoc, writeBatch } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, deleteDoc, writeBatch } from 'firebase/firestore';
 import type { Project } from '@/types';
 import { projects as seedProjects } from '@/data/projects';
+import { firebaseApp } from '@/lib/firebase';
 
-const firebaseConfig = {
-  "projectId": "krish-goswami-portfolio-qb9yp",
-  "appId": "1:425022461612:web:e29cfeb20159228aaff109",
-  "storageBucket": "krish-goswami-portfolio-qb9yp.firebasestorage.app",
-  "apiKey": "AIzaSyBiS2sr84cCa7ojoRD9Kr3WkSzo1rw_xB4",
-  "authDomain": "krish-goswami-portfolio-qb9yp.firebaseapp.com",
-  "measurementId": "",
-  "messagingSenderId": "425022461612"
-};
-
-// Initialize Firebase Admin SDK for server-side access
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
+const db = getFirestore(firebaseApp);
 const PROJECTS_COLLECTION = 'projects';
 
 export async function getProjects(): Promise<Project[]> {
@@ -39,35 +26,26 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-export async function getProject(id: string): Promise<Project | null> {
-  const docRef = doc(db, PROJECTS_COLLECTION, id);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    return { id: docSnap.id, ...docSnap.data() } as Project;
-  }
-  return null;
-}
-
 export async function addProject(project: Omit<Project, 'id'>): Promise<Project> {
   const projectsCollection = collection(db, PROJECTS_COLLECTION);
   const snapshot = await getDocs(projectsCollection);
 
-  // This check now only happens on the client, inside the authenticated CMS.
-  // The first authenticated user to add a project will trigger the seed.
+  // If this is the very first project being added, seed the database
+  // with the initial static projects first.
   if (snapshot.empty) {
-    console.log('Database is empty. Seeding with initial projects before adding the new one...');
+    console.log('Database is empty. Seeding with initial projects...');
     const batch = writeBatch(db);
     seedProjects.forEach((p) => {
-      const { id, ...projectData } = p;
-      // Let Firestore generate the ID
+      // Let Firestore generate the ID for the seed data
       const docRef = doc(collection(db, PROJECTS_COLLECTION));
+      const { id, ...projectData } = p;
       batch.set(docRef, projectData);
     });
     await batch.commit();
     console.log('Database seeded successfully.');
   }
 
-  const docRef = await addDoc(collection(db, PROJECTS_COLLECTION), project);
+  const docRef = await addDoc(projectsCollection, project);
   return { id: docRef.id, ...project };
 }
 
