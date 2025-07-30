@@ -15,13 +15,9 @@ const firebaseConfig = {
   "messagingSenderId": "425022461612"
 };
 
-let db: ReturnType<typeof getFirestore>;
-if (!getApps().length) {
-  const app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-} else {
-  db = getFirestore(getApp());
-}
+// Initialize Firebase Admin SDK for server-side access
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const PROJECTS_COLLECTION = 'projects';
 
@@ -38,6 +34,7 @@ export async function getProjects(): Promise<Project[]> {
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
   } catch (error) {
     console.error("Could not fetch projects, returning local fallback. Error:", error);
+    // On permission error or any other error, fall back to local data.
     return seedProjects;
   }
 }
@@ -54,12 +51,16 @@ export async function getProject(id: string): Promise<Project | null> {
 export async function addProject(project: Omit<Project, 'id'>): Promise<Project> {
   const projectsCollection = collection(db, PROJECTS_COLLECTION);
   const snapshot = await getDocs(projectsCollection);
+
+  // This check now only happens on the client, inside the authenticated CMS.
+  // The first authenticated user to add a project will trigger the seed.
   if (snapshot.empty) {
     console.log('Database is empty. Seeding with initial projects before adding the new one...');
     const batch = writeBatch(db);
     seedProjects.forEach((p) => {
       const { id, ...projectData } = p;
-      const docRef = doc(projectsCollection); 
+      // Let Firestore generate the ID
+      const docRef = doc(collection(db, PROJECTS_COLLECTION));
       batch.set(docRef, projectData);
     });
     await batch.commit();
