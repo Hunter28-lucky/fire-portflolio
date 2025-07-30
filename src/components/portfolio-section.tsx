@@ -7,8 +7,8 @@ import type { Project } from '@/types';
 import { Skeleton } from './ui/skeleton';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
-import { projects as seedProjects } from '@/data/projects';
 import { getProjects } from '@/services/project-service';
+import { projects as seedProjects } from '@/data/projects';
 
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
