@@ -5,8 +5,8 @@ import { Separator } from './ui/separator';
 
 export default async function PortfolioSection() {
   const freelancerSkills = 'website building, automation, AI projects';
-  const projectDescriptions = projects.map((p) => p.description).join('; ');
-  const performanceMetrics = projectPerformanceMetrics.join('; ');
+  const projectDescriptions = projects.map((p) => p.description).join(', ');
+  const performanceMetrics = projectPerformanceMetrics.join(', ');
   
   let displayedProjects = [];
   try {
