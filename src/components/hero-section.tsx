@@ -44,7 +44,7 @@ export default function HeroSection() {
           <a href="#projects"><Eye className="mr-2" /> Explore Projects</a>
         </Button>
         <Button asChild size="lg" variant="secondary" className="text-lg">
-          <a href="mailto:hire.krish.goswami@gmail.com" target="_blank" rel="noopener noreferrer"><Mail className="mr-2" /> Hire Me</a>
+          <a href="#contact"><Mail className="mr-2" /> Hire Me</a>
         </Button>
       </div>
     </section>

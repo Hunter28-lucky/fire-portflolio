@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Eye, Mail, Briefcase } from 'lucide-react';
+import { Eye, Mail, Briefcase, MessageSquare } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -10,17 +10,21 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useState } from 'react';
 
 export default function MobileCta() {
   const isMobile = useIsMobile();
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!isMobile) {
     return null;
   }
 
+  const closeSheet = () => setIsOpen(false);
+
   return (
     <div className="fixed bottom-0 z-50 w-full border-t border-white/10 bg-background/80 p-4 backdrop-blur-sm md:hidden">
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button size="lg" className="w-full">Menu</Button>
         </SheetTrigger>
@@ -29,14 +33,14 @@ export default function MobileCta() {
             <SheetTitle>Navigation</SheetTitle>
           </SheetHeader>
           <div className="grid gap-4 py-4">
-             <Button asChild size="lg">
+             <Button asChild size="lg" onClick={closeSheet}>
               <a href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer"><Briefcase className="mr-2" /> Fiverr Profile</a>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" onClick={closeSheet}>
               <a href="#projects"><Eye className="mr-2" /> Explore Projects</a>
             </Button>
-            <Button asChild size="lg" variant="secondary">
-              <a href="mailto:hire.krish.goswami@gmail.com" target="_blank" rel="noopener noreferrer"><Mail className="mr-2" /> Hire Me</a>
+            <Button asChild size="lg" variant="secondary" onClick={closeSheet}>
+              <a href="#contact"><Mail className="mr-2" /> Hire Me</a>
             </Button>
           </div>
         </SheetContent>
