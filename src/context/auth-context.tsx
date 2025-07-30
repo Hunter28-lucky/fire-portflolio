@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User, getAuth } from 'firebase/auth';
-import { firebaseApp } from '@/lib/firebase';
+import { firebaseApp } from '@/lib/firebase/client';
 
 interface AuthContextType {
   isAuthenticated: boolean;
