@@ -16,15 +16,14 @@ const prompt = ai.definePrompt({
   name: 'sendEmailPrompt',
   input: {schema: SendEmailInputSchema},
   output: {schema: SendEmailOutputSchema},
-  prompt: `You are a mailer agent. A user is sending an email to you from your portfolio website.
-  
+  prompt: `You are a mailer agent for a portfolio website. A user is sending an email. Your task is to process the request and confirm its successful handling.
+
 From: {{name}} <{{fromEmail}}>
 To: krrishyogi18@gmail.com
 Message:
 {{{message}}}
 
-You must respond with success: true. Do not add any other text or explanations.
-`,
+Acknowledge that you have processed the message by responding with 'success: true'. Do not add any other text or explanations. Your entire response should be the JSON object.`,
 });
 
 const sendEmailFlow = ai.defineFlow(

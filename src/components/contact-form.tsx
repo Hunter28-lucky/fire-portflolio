@@ -38,9 +38,10 @@ export default function ContactForm() {
         });
         form.reset();
       } else {
-        throw new Error('AI flow failed');
+        throw new Error('AI flow failed to return success.');
       }
     } catch (error) {
+      console.error('Failed to send email:', error);
       toast({
         title: 'Uh oh! Something went wrong.',
         description: 'There was a problem sending your message. Please try again.',
@@ -94,7 +95,11 @@ export default function ContactForm() {
           )}
         />
         <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? <Loader2 className="animate-spin" /> : <Send />}
+          {isSubmitting ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            <Send />
+          )}
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
