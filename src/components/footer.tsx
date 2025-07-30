@@ -16,7 +16,7 @@ export default function Footer() {
               <a href="https://github.com/Hunter28-lucky" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/krish-goswami-779595316" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin />
               </a>
             </div>
