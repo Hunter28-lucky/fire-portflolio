@@ -1,10 +1,9 @@
-import { projects } from '@/data/projects';
 import ProjectCard from './project-card';
 import { Separator } from './ui/separator';
+import { getProjects } from '@/services/project-service';
 
-export default function PortfolioSection() {
-  // Display all projects from the data file
-  const displayedProjects = projects;
+export default async function PortfolioSection() {
+  const projects = await getProjects();
 
   return (
     <section id="projects" className="w-full max-w-7xl px-4 py-16 sm:py-24">
@@ -18,7 +17,7 @@ export default function PortfolioSection() {
       </div>
       <Separator className="my-12 bg-primary/20" />
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
-        {displayedProjects.map((project) => (
+        {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>

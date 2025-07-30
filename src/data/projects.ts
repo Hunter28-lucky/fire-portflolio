@@ -1,5 +1,7 @@
 import type { Project } from '@/types';
 
+// This file is now a fallback and will be used to seed the database one time.
+// After the first run, all project data will be fetched from Firestore.
 export const projects: Project[] = [
   {
     id: '1',
