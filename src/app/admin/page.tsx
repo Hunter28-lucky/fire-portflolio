@@ -9,6 +9,9 @@ import ProjectCms from '@/components/project-cms';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogIn } from 'lucide-react';
 
+// Replace with your actual authorized admin emails
+const authorizedAdminEmails = ['krrishyogi18@gmail.com'];
+
 export default function AdminPage() {
   const { isAuthenticated, login, user } = useAuth();
   const router = useRouter();
@@ -17,10 +20,12 @@ export default function AdminPage() {
     await login();
   };
   
-  if (isAuthenticated) {
+  // Check if the user is authenticated AND if their email is in the authorized list
+  if (isAuthenticated && user && authorizedAdminEmails.includes(user.email || '')) {
     return <ProjectCms />;
   }
 
+  // If not authenticated or not authorized, show the login page
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <Card className="w-full max-w-sm glass-panel">
@@ -40,3 +45,4 @@ export default function AdminPage() {
     </div>
   );
 }
+'
