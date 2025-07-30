@@ -44,16 +44,16 @@ const prompt = ai.definePrompt({
   name: 'topProjectsPrompt',
   input: {schema: TopProjectsInputSchema},
   output: {schema: TopProjectsOutputSchema},
-  prompt: `You are an AI assistant helping a freelancer curate their portfolio.
+  prompt: `You are an expert portfolio curator for a top-tier freelancer. Your task is to analyze the provided project data and select the most impressive projects to showcase to potential clients.
 
-  Given the freelancer's skills, project descriptions, and performance metrics, select the top projects that best showcase their expertise and success.
+Analyze the following information:
+- Freelancer's Skills: {{{freelancerSkills}}}
+- Project Descriptions: {{{projectDescriptions}}}
+- Project Performance Metrics: {{{projectPerformanceMetrics}}}
 
-  Freelancer Skills: {{{freelancerSkills}}}
-  Project Descriptions: {{{projectDescriptions}}}
-  Project Performance Metrics: {{{projectPerformanceMetrics}}}
+Based on this data, identify the projects that best highlight the freelancer's expertise and success.
 
-  Based on this information, curate a list of the top projects that would be most impressive to potential clients.
-  The list should be comma seperated.`,
+Your final output must be a single, comma-separated string of the project titles you have selected. Do not include any other text, explanations, or formatting.`,
 });
 
 const getTopProjectsFlow = ai.defineFlow(
