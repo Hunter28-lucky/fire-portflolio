@@ -40,11 +40,17 @@ export default function HeroSection() {
           <span></span>
           <div><Briefcase className="mr-2" /> View My Fiverr Profile</div>
         </a>
-        <Button asChild size="lg" variant="outline" className="bg-transparent text-lg">
-          <a href="#projects"><Eye className="mr-2" /> Explore Projects</a>
+        <Button asChild size="lg" className="text-lg">
+          <a href="#projects" className="neon-border-button">
+            <span></span>
+            <div><Eye className="mr-2" /> Explore Projects</div>
+          </a>
         </Button>
-        <Button asChild size="lg" variant="secondary" className="text-lg">
-          <a href="#contact"><Mail className="mr-2" /> Hire Me</a>
+        <Button asChild size="lg" className="text-lg">
+          <a href="#contact" className="neon-border-button">
+            <span></span>
+            <div><Mail className="mr-2" /> Hire Me</div>
+          </a>
         </Button>
       </div>
     </section>
