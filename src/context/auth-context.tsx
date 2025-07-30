@@ -29,7 +29,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const result = await signInWithPopup(auth, provider);
       setUser(result.user);
-    } catch (error) {
+    } catch (error: any) {
+      // Don't log an error if the user cancels the popup
+      if (error.code === 'auth/cancelled-popup-request') {
+        return;
+      }
       console.error("Authentication failed:", error);
     }
   };
