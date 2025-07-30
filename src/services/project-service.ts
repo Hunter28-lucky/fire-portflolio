@@ -7,33 +7,46 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  getDoc,
+  writeBatch,
 } from 'firebase/firestore';
 import type {Project} from '@/types';
-import {db} from '@/lib/firebase/client'; // Use the client-side db for CMS operations
+import {db} from '@/lib/firebase/client';
 import {projects as seedProjects} from '@/data/projects';
 
 const PROJECTS_COLLECTION = 'projects';
 
-// This function is used by the client-side CMS
+// One-time function to seed the database if it's empty
+async function seedDatabase() {
+  const projectsCollection = collection(db, PROJECTS_COLLECTION);
+  const snapshot = await getDocs(projectsCollection);
+
+  if (snapshot.empty) {
+    console.log('Database is empty. Seeding with initial projects...');
+    const batch = writeBatch(db);
+    seedProjects.forEach(project => {
+      // Firestore will auto-generate IDs, so we don't use the local ones.
+      const {id, ...projectData} = project;
+      const docRef = doc(collection(db, PROJECTS_COLLECTION));
+      batch.set(docRef, projectData);
+    });
+    await batch.commit();
+    console.log('Database seeded successfully.');
+  }
+}
+
 export async function getProjects(): Promise<Project[]> {
+  // Ensure the database is seeded if empty before fetching
+  await seedDatabase();
+
   try {
     const projectsCollection = collection(db, PROJECTS_COLLECTION);
     const snapshot = await getDocs(projectsCollection);
-
-    if (snapshot.empty) {
-      // Fallback for when the CMS is opened for the first time before any projects are added.
-      return seedProjects;
-    }
-
     return snapshot.docs.map(doc => ({id: doc.id, ...doc.data()} as Project));
   } catch (error) {
-    console.error(
-      'Could not fetch projects, returning local fallback. Error:',
-      error,
-    );
-    // This fallback is for display purposes if firestore is unreachable.
-    return seedProjects;
+    console.error('Could not fetch projects from Firestore. Error:', error);
+    // Return an empty array on failure to prevent crashes.
+    // The CMS will show a "could not load" message.
+    return [];
   }
 }
 

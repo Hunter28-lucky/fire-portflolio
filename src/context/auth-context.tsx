@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User, getAuth } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, User, getAuth } from 'firebase/auth';
 import { firebaseApp } from '@/lib/firebase/client';
 
 interface AuthContextType {
@@ -27,13 +27,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      await signInWithRedirect(auth, provider);
     } catch (error: any) {
-      // Don't log an error if the user cancels the popup
-      if (error.code === 'auth/cancelled-popup-request') {
-        return;
-      }
       console.error("Authentication failed:", error);
     }
   };

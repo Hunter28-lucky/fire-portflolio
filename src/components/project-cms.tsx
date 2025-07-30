@@ -9,10 +9,9 @@ import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogOut, PlusCircle } from 'lucide-react';
+import { LogOut, PlusCircle, Loader2 } from 'lucide-react';
 import { getProjects, addProject, updateProject, deleteProject } from '@/services/project-service';
 import { useToast } from '@/hooks/use-toast';
-import { projects as seedProjects } from '@/data/projects';
 
 export default function ProjectCms() {
   const { logout, user } = useAuth();
@@ -29,11 +28,11 @@ export default function ProjectCms() {
       } catch (error) {
         console.error("Failed to fetch projects:", error);
         toast({
-          title: "Error",
-          description: "Could not load projects. Displaying local data.",
+          title: "Error Loading Projects",
+          description: "Could not load projects from the database. Please check your connection and try again.",
           variant: "destructive",
         });
-        setProjects(seedProjects); // Fallback to local data on error
+        setProjects([]); // Set to empty array on error
       } finally {
         setIsLoading(false);
       }
@@ -120,8 +119,11 @@ export default function ProjectCms() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto py-8 text-center">
-        <p>Loading projects...</p>
+      <div className="container mx-auto flex min-h-screen items-center justify-center text-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <p className="text-muted-foreground">Loading projects from the mothership...</p>
+        </div>
       </div>
     );
   }
@@ -164,7 +166,8 @@ export default function ProjectCms() {
                 <Input
                   id={`title-${project.id}`}
                   value={project.title}
-                  onChange={(e) => handleProjectChange(project.id, 'title', e.target.value)}
+                  onBlur={(e) => handleProjectChange(project.id, 'title', e.target.value)}
+                  onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, title: e.target.value} : p))}
                 />
               </div>
               <div className="space-y-2">
@@ -172,7 +175,8 @@ export default function ProjectCms() {
                 <Input
                   id={`link-${project.id}`}
                   value={project.link}
-                  onChange={(e) => handleProjectChange(project.id, 'link', e.target.value)}
+                  onBlur={(e) => handleProjectChange(project.id, 'link', e.target.value)}
+                  onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, link: e.target.value} : p))}
                 />
               </div>
               <div className="space-y-2 col-span-full">
@@ -180,7 +184,8 @@ export default function ProjectCms() {
                 <Textarea
                   id={`description-${project.id}`}
                   value={project.description}
-                  onChange={(e) => handleProjectChange(project.id, 'description', e.target.value)}
+                  onBlur={(e) => handleProjectChange(project.id, 'description', e.target.value)}
+                  onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, description: e.target.value} : p))}
                 />
               </div>
               <div className="space-y-2">
@@ -188,7 +193,8 @@ export default function ProjectCms() {
                 <Input
                   id={`imageUrl-${project.id}`}
                   value={project.imageUrl}
-                  onChange={(e) => handleProjectChange(project.id, 'imageUrl', e.target.value)}
+                  onBlur={(e) => handleProjectChange(project.id, 'imageUrl', e.target.value)}
+                   onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, imageUrl: e.target.value} : p))}
                 />
               </div>
                <div className="space-y-2">
@@ -196,7 +202,8 @@ export default function ProjectCms() {
                 <Input
                   id={`aiHint-${project.id}`}
                   value={project.aiHint}
-                  onChange={(e) => handleProjectChange(project.id, 'aiHint', e.target.value)}
+                  onBlur={(e) => handleProjectChange(project.id, 'aiHint', e.target.value)}
+                   onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, aiHint: e.target.value} : p))}
                 />
               </div>
               <div className="space-y-2">
@@ -204,7 +211,8 @@ export default function ProjectCms() {
                 <Input
                   id={`tags-${project.id}`}
                   value={project.tags.join(',')}
-                  onChange={(e) => handleProjectChange(project.id, 'tags', e.target.value.split(',').map(tag => tag.trim()))}
+                  onBlur={(e) => handleProjectChange(project.id, 'tags', e.target.value.split(',').map(tag => tag.trim()))}
+                   onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, tags: e.target.value.split(',').map(tag => tag.trim())} : p))}
                 />
               </div>
             </CardContent>
