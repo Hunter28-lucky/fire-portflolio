@@ -78,10 +78,14 @@
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary));
   }
+
+  section {
+    transition: opacity 1s, transform 1s;
+  }
 }
 
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg;
+  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg transition-all duration-500;
 }
 
 .neon-border-button {

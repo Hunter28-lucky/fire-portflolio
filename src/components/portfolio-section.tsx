@@ -6,11 +6,18 @@ import { Separator } from './ui/separator';
 import { getProjects } from '@/services/project-service';
 import type { Project } from '@/types';
 import { Skeleton } from './ui/skeleton';
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
 
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -26,7 +33,14 @@ export default function PortfolioSection() {
   }, []);
 
   return (
-    <section id="projects" className="w-full max-w-7xl px-4 py-16 sm:py-24">
+    <section 
+      id="projects"
+      ref={ref}
+      className={cn(
+        'w-full max-w-7xl px-4 py-16 sm:py-24 opacity-0 transform translate-y-8',
+        inView && 'opacity-100 translate-y-0'
+      )}
+    >
       <div className="flex flex-col items-center text-center">
         <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
           My Recent Work
@@ -48,8 +62,8 @@ export default function PortfolioSection() {
          </div>
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index}/>
           ))}
         </div>
       )}

@@ -35,7 +35,8 @@ export default function HeroSection() {
             </p>
         </div>
       </div>
-      <div className="hidden flex-col items-center gap-4 sm:flex-row md:flex">
+      {/* Mobile layout: buttons stack vertically */}
+      <div className="flex flex-col items-center gap-4 sm:flex-row md:flex">
         <a href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer" className="neon-border-button">
           <span></span>
           <div><Briefcase className="mr-2" /> View My Fiverr Profile</div>

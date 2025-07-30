@@ -91,12 +91,52 @@ export default {
         'fade-in': {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
-        }
+        },
+        'smooth-slide-in-bottom': {
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+        'smooth-slide-out-bottom': {
+            from: { transform: 'translateY(0)' },
+            to: { transform: 'translateY(100%)' },
+        },
+        'slide-in-top': {
+            from: { transform: 'translateY(-100%)' },
+            to: { transform: 'translateY(0)' },
+        },
+        'slide-out-top': {
+            from: { transform: 'translateY(0)' },
+            to: { transform: 'translateY(-100%)' },
+        },
+        'slide-in-left': {
+            from: { transform: 'translateX(-100%)' },
+            to: { transform: 'translateX(0)' },
+        },
+        'slide-out-left': {
+            from: { transform: 'translateX(0)' },
+            to: { transform: 'translateX(-100%)' },
+        },
+        'slide-in-right': {
+            from: { transform: 'translateX(100%)' },
+            to: { transform: 'translateX(0)' },
+        },
+        'slide-out-right': {
+            from: { transform: 'translateX(0)' },
+            to: { transform: 'translateX(100%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 1s ease-in-out forwards',
+        'smooth-slide-in-bottom': 'smooth-slide-in-bottom 0.7s cubic-bezier(0.32, 1, 0.45, 1) forwards',
+        'smooth-slide-out-bottom': 'smooth-slide-out-bottom 0.5s cubic-bezier(0.55, 0, 0.68, 0) forwards',
+        'slide-in-top': 'slide-in-top 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+        'slide-out-top': 'slide-out-top 0.5s cubic-bezier(0.5, 0, 0.75, 0) forwards',
+        'slide-in-left': 'slide-in-left 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+        'slide-out-left': 'slide-out-left 0.5s cubic-bezier(0.5, 0, 0.75, 0) forwards',
+        'slide-in-right': 'slide-in-right 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+        'slide-out-right': 'slide-out-right 0.5s cubic-bezier(0.5, 0, 0.75, 0) forwards',
       },
     },
   },

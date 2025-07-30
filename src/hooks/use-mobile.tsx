@@ -1,5 +1,7 @@
 import * as React from "react"
+import { useInView } from "react-intersection-observer";
 
+export { useInView };
 const MOBILE_BREAKPOINT = 768
 
 export function useIsMobile() {
