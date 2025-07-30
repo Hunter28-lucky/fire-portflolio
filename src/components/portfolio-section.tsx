@@ -8,6 +8,7 @@ import type { Project } from '@/types';
 import { Skeleton } from './ui/skeleton';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
+import { projects as seedProjects } from '@/data/projects';
 
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -22,9 +23,12 @@ export default function PortfolioSection() {
     const fetchProjects = async () => {
       try {
         const dbProjects = await getProjects();
+        // If firestore is empty or errors, dbProjects will be the seed projects.
+        // We can check if it's the seed data and handle accordingly if needed.
         setProjects(dbProjects);
       } catch (error) {
-        console.error("Failed to fetch projects:", error);
+        console.error("Failed to fetch projects, falling back to local data:", error);
+        setProjects(seedProjects); // Explicitly fallback on error.
       } finally {
         setIsLoading(false);
       }
