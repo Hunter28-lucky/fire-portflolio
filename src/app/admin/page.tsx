@@ -6,23 +6,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEffect } from 'react';
 import ProjectCms from '@/components/project-cms';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { LogIn } from 'lucide-react';
 
 export default function AdminPage() {
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated, login, user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      // User is already authenticated, maybe redirect them to a dashboard
-    }
-  }, [isAuthenticated, router]);
-
-  const handleLogin = () => {
-    login();
-    // Redirect to a protected dashboard page after login if needed
-    // router.push('/admin/dashboard');
+  const handleLogin = async () => {
+    await login();
   };
-
+  
   if (isAuthenticated) {
     return <ProjectCms />;
   }
@@ -30,13 +24,16 @@ export default function AdminPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <Card className="w-full max-w-sm glass-panel">
-        <CardHeader className="text-center">
+        <CardHeader className="text-center items-center gap-4">
+          <Avatar>
+            <AvatarFallback>A</AvatarFallback>
+          </Avatar>
           <CardTitle className="text-2xl font-headline">Admin Login</CardTitle>
-          <CardDescription>Click the button to log in as an administrator.</CardDescription>
+          <CardDescription>Log in with your Google account to manage your portfolio.</CardDescription>
         </CardHeader>
         <CardContent>
           <Button onClick={handleLogin} className="w-full" variant="secondary">
-            Login as Admin
+            <LogIn className="mr-2" /> Login with Google
           </Button>
         </CardContent>
       </Card>

@@ -9,9 +9,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { LogOut } from 'lucide-react';
 
 export default function ProjectCms() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [generatedCode, setGeneratedCode] = useState('');
 
@@ -55,16 +57,29 @@ export const projectPerformanceMetrics: string[] = [];
   return (
     <div className="container mx-auto py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-headline">Project CMS</h1>
-        <Button onClick={logout} variant="secondary">Logout</Button>
+        <div className="flex items-center gap-4">
+          <Avatar>
+            <AvatarImage src={user?.photoURL ?? undefined} />
+            <AvatarFallback>{user?.displayName?.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div>
+            <h1 className="text-2xl font-headline">Project CMS</h1>
+            <p className="text-muted-foreground">Logged in as {user?.displayName}</p>
+          </div>
+        </div>
+        <Button onClick={logout} variant="secondary">
+          <LogOut className="mr-2" /> Logout
+        </Button>
       </div>
 
       <div className="space-y-8">
         {projects.map(project => (
           <Card key={project.id} className="glass-panel">
             <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
-                <Button onClick={() => removeProject(project.id)} variant="destructive" size="sm" className="w-fit">Remove</Button>
+                <div className="flex justify-between items-center">
+                    <CardTitle>{project.title}</CardTitle>
+                    <Button onClick={() => removeProject(project.id)} variant="destructive" size="sm" className="w-fit">Remove</Button>
+                </div>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">

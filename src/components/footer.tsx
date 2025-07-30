@@ -17,12 +17,12 @@ export default function Footer() {
             <h3 className="text-lg font-headline text-primary-foreground">Get in Touch</h3>
             <div className="flex gap-4">
               <Button asChild size="lg" variant="secondary">
-                <a href="mailto:hire.krish.goswami@example.com">
+                <a href="mailto:hire.krish.goswami@gmail.com">
                   <Mail className="mr-2" /> Hire Me
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-transparent">
-                <a href="mailto:message.krish.goswami@example.com">
+                <a href="mailto:message.krish.goswami@gmail.com">
                   <Send className="mr-2" /> Message Me
                 </a>
               </Button>

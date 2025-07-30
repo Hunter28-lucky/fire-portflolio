@@ -1,4 +1,5 @@
 import { AuthProvider } from '@/context/auth-context';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function AdminLayout({
   children,
@@ -10,6 +11,7 @@ export default function AdminLayout({
       <div className="bg-background text-foreground min-h-screen">
         {children}
       </div>
+      <Toaster />
     </AuthProvider>
   );
 }
