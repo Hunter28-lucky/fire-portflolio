@@ -7,7 +7,7 @@ export default async function PortfolioSection() {
   const freelancerSkills = 'website building, automation, AI projects';
   const projectDescriptions = projects.map((p) => p.description).join(', ');
   const performanceMetrics = projectPerformanceMetrics.join(', ');
-  
+
   let displayedProjects = [];
   try {
     const { topProjects } = await getTopProjects({
@@ -15,10 +15,10 @@ export default async function PortfolioSection() {
       projectDescriptions,
       projectPerformanceMetrics: performanceMetrics,
     });
-    
+
     // The AI returns project titles, so we filter based on that.
     const topProjectTitles = topProjects.split(',').map(t => t.trim().toLowerCase());
-    
+
     displayedProjects = projects.filter(p => topProjectTitles.includes(p.title.toLowerCase()));
 
     // Fallback to show all projects if AI returns fewer than 3
