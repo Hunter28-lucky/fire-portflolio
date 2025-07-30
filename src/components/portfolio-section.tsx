@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import ProjectCard from './project-card';
 import { Separator } from './ui/separator';
-import { getProjects } from '@/services/project-service';
 import type { Project } from '@/types';
 import { Skeleton } from './ui/skeleton';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { projects as seedProjects } from '@/data/projects';
+import { getProjects } from '@/services/project-service';
 
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -21,14 +21,13 @@ export default function PortfolioSection() {
   
   useEffect(() => {
     const fetchProjects = async () => {
+      setIsLoading(true);
       try {
         const dbProjects = await getProjects();
-        // If firestore is empty or errors, dbProjects will be the seed projects.
-        // We can check if it's the seed data and handle accordingly if needed.
         setProjects(dbProjects);
       } catch (error) {
         console.error("Failed to fetch projects, falling back to local data:", error);
-        setProjects(seedProjects); // Explicitly fallback on error.
+        setProjects(seedProjects);
       } finally {
         setIsLoading(false);
       }

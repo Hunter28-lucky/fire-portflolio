@@ -2,7 +2,7 @@
 
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, writeBatch, getDoc } from 'firebase/firestore';
 import type { Project } from '@/types';
-import { db } from '@/lib/firebase/client'; // Use client db for client-side fetching
+import { db } from '@/lib/firebase/client';
 import { projects as seedProjects } from '@/data/projects';
 
 const PROJECTS_COLLECTION = 'projects';
@@ -20,7 +20,6 @@ export async function getProjects(): Promise<Project[]> {
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
   } catch (error) {
     console.error("Could not fetch projects, returning local fallback. Error:", error);
-    // This will catch permission errors on the client and return the fallback data.
     return seedProjects;
   }
 }
