@@ -4,12 +4,13 @@ import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  "projectId": "krish-goswami-portfolio-qb9yp",
+  "appId": "1:425022461612:web:e29cfeb20159228aaff109",
+  "storageBucket": "krish-goswami-portfolio-qb9yp.firebasestorage.app",
+  "apiKey": "AIzaSyBiS2sr84cCa7ojoRD9Kr3WkSzo1rw_xB4",
+  "authDomain": "krish-goswami-portfolio-qb9yp.firebaseapp.com",
+  "measurementId": "",
+  "messagingSenderId": "425022461612"
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
