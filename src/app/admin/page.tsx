@@ -25,6 +25,30 @@ export default function AdminPage() {
     }
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    // Redirect to admin page if authenticated and authorized
+    if (isAuthenticated && user && authorizedAdminEmails.includes(user.email || '')) {
+      // You might want to add a check here to prevent infinite redirects
+      // if the user is already on the admin page
+      // if (router.pathname !== '/admin') {
+      //   router.push('/admin');
+      // }
+    } else if (isAuthenticated && user && !authorizedAdminEmails.includes(user.email || '')) {
+      // If authenticated but not authorized, you could redirect to a different page
+      // or show an unauthorized message
+      console.log("User is authenticated but not authorized.", user.email);
+      // Example: Redirect to home page
+      // router.push('/');
+    } else if (!isAuthenticated && !isLoading) {
+      // If not authenticated and not loading, ensure we are on the login page
+      // You might want to add a check here to prevent infinite redirects
+      // if the user is already on the login page
+      // if (router.pathname !== '/admin') {
+      //   router.push('/admin');
+      // }
+    }
+  }, [isAuthenticated, user, isLoading, router]);
+
   const handleLogin = async () => {
     await login();
   };
