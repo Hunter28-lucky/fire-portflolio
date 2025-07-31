@@ -11,7 +11,7 @@ import { LogIn, Loader2 } from 'lucide-react';
 const authorizedAdminEmails = ['krrishyogi18@gmail.com'];
 
 export default function AdminPage() {
-  const { isAuthenticated, login, user, loading } = useAuth();
+  const { isAuthenticated, login, user, loading, logout } = useAuth(); // Added logout here
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -35,7 +35,7 @@ export default function AdminPage() {
        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 gap-4">
         <h1 className="text-2xl font-headline">Unauthorized</h1>
         <p className="text-muted-foreground">You are not authorized to view this page.</p>
-        <Button onClick={() => router.push('/')}>Go to Home</Button>
+        <Button onClick={logout} variant="secondary">Logout</Button> {/* Added logout button */}
       </div>
     )
   }
