@@ -7,18 +7,25 @@
         type SendEmailInput,
         type SendEmailOutput,
       } from '@/types/email';
-      import { Resend } from 'resend'; // Import Resend directly here
+      import resend from '@/lib/resend';
       import ContactFormEmail from '@/components/emails/contact-form';
-      
-      // Initialize Resend with the provided API key
-      const resend = new Resend('re_GfnSnYEH_BuwzHWWWDgZWqXtMj1H6D9dC');
       
       export async function sendEmail(
         input: SendEmailInput,
       ): Promise<SendEmailOutput> {
         const {fromEmail, name, message} = input;
-        const toEmail = 'krrishyogi18@gmail.com'; // Hardcoded recipient email
-        const fromSender = 'onboarding@resend.dev'; // Resend's default test email
+        const toEmail = process.env.RECIPIENT_EMAIL;
+        const fromSender = process.env.SENDER_EMAIL;
+
+        if (!toEmail) {
+          console.error('Recipient email is not configured. Please set RECIPIENT_EMAIL environment variable.');
+          return {success: false, error: "Recipient email is not configured."};
+        }
+
+        if (!fromSender) {
+          console.error('Sender email is not configured. Please set SENDER_EMAIL environment variable.');
+          return {success: false, error: "Sender email is not configured."};
+        }
         
         try {
           await resend.emails.send({
