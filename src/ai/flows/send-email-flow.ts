@@ -43,7 +43,7 @@
         } catch (error) {
           console.error('Error sending email:', error);
           const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-          return {success: false, error: `Failed to send email: ${errorMessage}`};
+          return {success: false, error: `Failed to send email: ${errorMessage}`;
         }
       }
       
@@ -51,7 +51,7 @@
         name: 'sendEmailPrompt',
         input: {schema: SendEmailInputSchema},
         output: {schema: SendEmailOutputSchema},
-        prompt: \`You are an email sending assistant. A user has submitted a contact form. 
-        Your only job is to acknowledge the request and confirm that it will be sent.
-        Do not add any other commentary. Just confirm the action.`,
+        prompt: 'You are an email sending assistant. A user has submitted a contact form.
+Your only job is to acknowledge the request and confirm that it will be sent.
+Do not add any other commentary. Just confirm the action.',
       });
