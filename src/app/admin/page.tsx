@@ -4,70 +4,42 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useEffect, useState } from 'react';
 import ProjectCms from '@/components/project-cms';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogIn } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { LogIn, Loader2 } from 'lucide-react';
 
-// Replace with your actual authorized admin emails
 const authorizedAdminEmails = ['krrishyogi18@gmail.com'];
 
 export default function AdminPage() {
-  const { isAuthenticated, login, user } = useAuth();
+  const { isAuthenticated, login, user, loading } = useAuth();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Once the authentication state is known, set isLoading to false
-    if (isAuthenticated !== undefined) {
-      setIsLoading(false);
-    }
-  }, [isAuthenticated]);
-
-  useEffect(() => {
-    // Redirect to admin page if authenticated and authorized
-    if (isAuthenticated && user && authorizedAdminEmails.includes(user.email || '')) {
-      // You might want to add a check here to prevent infinite redirects
-      // if the user is already on the admin page
-      // if (router.pathname !== '/admin') {
-      //   router.push('/admin');
-      // }
-    } else if (isAuthenticated && user && !authorizedAdminEmails.includes(user.email || '')) {
-      // If authenticated but not authorized, you could redirect to a different page
-      // or show an unauthorized message
-      console.log("User is authenticated but not authorized.", user.email);
-      // Example: Redirect to home page
-      // router.push('/');
-    } else if (!isAuthenticated && !isLoading) {
-      // If not authenticated and not loading, ensure we are on the login page
-      // You might want to add a check here to prevent infinite redirects
-      // if the user is already on the login page
-      // if (router.pathname !== '/admin') {
-      //   router.push('/admin');
-      // }
-    }
-  }, [isAuthenticated, user, isLoading, router]);
 
   const handleLogin = async () => {
     await login();
   };
-  
-  // Show a loading state while the authentication status is being determined
-  if (isLoading) {
+
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
-        <Skeleton className="w-[300px] h-[300px]" />
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
   }
 
-  // Check if the user is authenticated AND if their email is in the authorized list
   if (isAuthenticated && user && authorizedAdminEmails.includes(user.email || '')) {
     return <ProjectCms />;
   }
+  
+  if (isAuthenticated && user && !authorizedAdminEmails.includes(user.email || '')) {
+    return (
+       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 gap-4">
+        <h1 className="text-2xl font-headline">Unauthorized</h1>
+        <p className="text-muted-foreground">You are not authorized to view this page.</p>
+        <Button onClick={() => router.push('/')}>Go to Home</Button>
+      </div>
+    )
+  }
 
-  // If not authenticated or not authorized, show the login page
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <Card className="w-full max-w-sm glass-panel">

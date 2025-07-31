@@ -7,6 +7,7 @@ import { firebaseApp } from '@/lib/firebase/client';
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
+  loading: boolean; // Add loading state
   login: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -15,11 +16,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true); // Initialize loading to true
   const auth = getAuth(firebaseApp);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false); // Set loading to false once auth state is determined
     });
     return () => unsubscribe();
   }, [auth]);
@@ -43,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: !!user, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated: !!user, user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
