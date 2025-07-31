@@ -33,7 +33,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.imageUrl}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105 project-image"
             data-ai-hint={project.aiHint}
           />
         </div>
