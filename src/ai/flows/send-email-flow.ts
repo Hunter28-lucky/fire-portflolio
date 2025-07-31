@@ -51,7 +51,7 @@
         name: 'sendEmailPrompt',
         input: {schema: SendEmailInputSchema},
         output: {schema: SendEmailOutputSchema},
-        prompt: 'You are an email sending assistant. A user has submitted a contact form.
+        prompt: 'A user has submitted a contact form.
 Your only job is to acknowledge the request and confirm that it will be sent.
 Do not add any other commentary. Just confirm the action.',
       });
