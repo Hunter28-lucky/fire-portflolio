@@ -5,6 +5,7 @@ import HeroSection from '@/components/hero-section';
 import MobileCta from '@/components/mobile-cta';
 import PortfolioSection from '@/components/portfolio-section';
 import SplineSection from '@/components/spline-section';
+import Head from 'next/head'; // Import Head
 
 export default function Home() {
   const schemaMarkup = {
@@ -27,6 +28,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <meta name="google-site-verification" content="_aJe80vNCJUNUxqfdrGVigptIOp5DJuqA903gr6xhso" />
+      </Head>
       <main className="flex w-full flex-col items-center overflow-x-hidden">
         <HeroSection />
         <SplineSection />
