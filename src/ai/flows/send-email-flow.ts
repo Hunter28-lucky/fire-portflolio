@@ -1,6 +1,5 @@
 'use server';
       
-      import {ai} from '@/ai/genkit';
       import {
         SendEmailInputSchema,
         SendEmailOutputSchema,
@@ -47,13 +46,4 @@
         }
       }
       
-      const prompt = ai.definePrompt({
-        name: 'sendEmailPrompt',
-        input: {schema: SendEmailInputSchema},
-        output: {schema: SendEmailOutputSchema},
-        prompt: `A user has submitted a contact form.
-\
-Your only job is to acknowledge the request and confirm that it will be sent.
-\
-Do not add any other commentary. Just confirm the action.`,
-      });
+      // Removed Genkit prompt definition as Genkit packages were removed.
