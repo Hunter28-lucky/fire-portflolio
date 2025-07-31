@@ -5,8 +5,9 @@ import CustomCursor from '@/components/custom-cursor';
 import AnimatedBackground from '@/components/animated-background';
 
 export const metadata: Metadata = {
-  title: 'Krish Goswami Portfolio',
-  description: 'Top-Rated Fiverr Developer | AI & Automation Expert',
+  title: 'Krish Goswami (Krish Yogi) – AI Automation | VFX Designer | Web Developer Portfolio',
+  description: 'This is the official portfolio of Krish Goswami (also known as Krish Yogi). Explore his work in AI automation, VFX design, and modern web development. Showcasing cutting-edge tech, digital art, and innovative tools.',
+  keywords: 'Krish Goswami, Krish Yogi, Krish, Krish Goswami Portfolio, AI Developer India, VFX Designer, Automation Engineer, Video Editing, Blender VFX, Web Developer Portfolio, Computer Science Student, Tech Entrepreneur India, Website Developer',
 };
 
 export default function RootLayout({
