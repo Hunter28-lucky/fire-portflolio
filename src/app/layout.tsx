@@ -298,6 +298,104 @@ export default function RootLayout({
         {/* Preload critical assets */}
         <link rel="preload" as="image" href="/icon.png" />
         <link rel="preload" as="image" href="/favicon.ico" />
+        
+        {/* Additional Performance Hints */}
+        <link rel="prerender" href="https://krishgoswami.me" />
+        <link rel="prefetch" href="https://krishgoswami.me/#projects" />
+        <link rel="prefetch" href="https://krishgoswami.me/#contact" />
+        
+        {/* Mobile App Capability */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Krish Goswami" />
+        
+        {/* Windows Tiles */}
+        <meta name="msapplication-TileImage" content="/icon.png" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="msapplication-tooltip" content="Krish Goswami - Web Developer" />
+        <meta name="msapplication-starturl" content="/" />
+        
+        {/* iOS Specific */}
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/apple-icon.png" />
+        
+        {/* Android Chrome */}
+        <link rel="icon" sizes="192x192" href="/icon.png" />
+        <link rel="icon" sizes="512x512" href="/icon.png" />
+        
+        {/* Alternate formats for better compatibility */}
+        <link rel="alternate" type="application/rss+xml" title="Krish Goswami" href="https://krishgoswami.me/rss.xml" />
+        <link rel="alternate" type="application/atom+xml" title="Krish Goswami" href="https://krishgoswami.me/atom.xml" />
+        
+        {/* JSON-LD for additional context */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "@id": "https://krishgoswami.me",
+                "url": "https://krishgoswami.me",
+                "name": "Krish Goswami - Web Developer & AI Expert",
+                "isPartOf": { "@id": "https://krishgoswami.me/#website" },
+                "primaryImageOfPage": { "@id": "https://krishgoswami.me/#primaryimage" },
+                "datePublished": "2024-01-01T00:00:00+00:00",
+                "dateModified": "2025-10-10T00:00:00+00:00",
+                "description": "Krish Goswami - Top-Rated Web Developer & AI Automation Expert",
+                "breadcrumb": { "@id": "https://krishgoswami.me/#breadcrumb" },
+                "inLanguage": "en-US",
+                "potentialAction": [
+                  {
+                    "@type": "ReadAction",
+                    "target": ["https://krishgoswami.me"]
+                  }
+                ]
+              },
+              {
+                "@type": "ImageObject",
+                "@id": "https://krishgoswami.me/#primaryimage",
+                "inLanguage": "en-US",
+                "url": "https://krishgoswami.me/opengraph-image",
+                "contentUrl": "https://krishgoswami.me/opengraph-image",
+                "width": 1200,
+                "height": 630,
+                "caption": "Krish Goswami - Web Developer Portfolio"
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": "https://krishgoswami.me/#breadcrumb",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://krishgoswami.me"
+                  }
+                ]
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://krishgoswami.me/#website",
+                "url": "https://krishgoswami.me",
+                "name": "Krish Goswami",
+                "description": "Professional Web Developer & AI Expert",
+                "publisher": { "@id": "https://krishgoswami.me/#person" },
+                "potentialAction": [
+                  {
+                    "@type": "SearchAction",
+                    "target": {
+                      "@type": "EntryPoint",
+                      "urlTemplate": "https://krishgoswami.me/?s={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                  }
+                ],
+                "inLanguage": "en-US"
+              }
+            ]
+          })
+        }} />
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary/40">
         <FontLoader />

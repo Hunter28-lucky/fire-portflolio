@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Krish Goswami - Web Developer &amp; AI Expert</title>
+  <link href="https://krishgoswami.me/atom.xml" rel="self"/>
+  <link href="https://krishgoswami.me"/>
+  <updated>2025-10-10T00:00:00+00:00</updated>
+  <id>https://krishgoswami.me</id>
+  <author>
+    <name>Krish Goswami</name>
+    <email>contact@krishgoswami.me</email>
+  </author>
+  <entry>
+    <title>Krish Goswami Portfolio</title>
+    <link href="https://krishgoswami.me"/>
+    <id>https://krishgoswami.me</id>
+    <updated>2025-10-10T00:00:00+00:00</updated>
+    <summary>Professional portfolio showcasing web development, AI automation, and VFX design projects by Krish Goswami (Krish Yogi)</summary>
+  </entry>
+</feed>

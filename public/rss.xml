@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Krish Goswami - Web Developer &amp; AI Expert</title>
+    <description>Updates from Krish Goswami - Top-Rated Web Developer, AI Automation Expert, and VFX Designer</description>
+    <link>https://krishgoswami.me</link>
+    <atom:link href="https://krishgoswami.me/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Thu, 10 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Krish Goswami Portfolio Launch</title>
+      <description>Professional portfolio showcasing web development, AI automation, and VFX design projects by Krish Goswami</description>
+      <link>https://krishgoswami.me</link>
+      <guid isPermaLink="true">https://krishgoswami.me</guid>
+      <pubDate>Thu, 10 Oct 2025 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
