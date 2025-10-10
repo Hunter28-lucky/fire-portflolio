@@ -13,6 +13,14 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+  optimizeFonts: true,
+  
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
   images: {
     remotePatterns: [
       {

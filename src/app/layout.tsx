@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Krish Goswami (Krish Yogi) – AI Automation | VFX Designer | Web Developer',
     template: '%s | Krish Goswami Portfolio',
   },
-  description: 'Krish Goswami (Krish Yogi) - Top-Rated Fiverr Developer | Expert in AI Automation, VFX Design & Web Development | Next.js, React, Firebase | Hire for custom web apps, automation solutions & stunning visual effects | Based in India | Available for freelance projects',
+  description: 'Top-Rated Fiverr Developer specializing in AI Automation, VFX Design & Web Development. Expert in Next.js, React, Firebase. Available for hire.',
   keywords: [
     // Name variations
     'Krish Goswami',
