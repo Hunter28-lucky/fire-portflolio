@@ -83,25 +83,108 @@
   }
 
   section {
-    transition: opacity 1s, transform 1s;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  /* Optimize rendering for mobile */
+  @media (max-width: 768px) {
+    section {
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    }
   }
 }
 
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg transition-all duration-500;
+  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg transition-all duration-300;
+}
+
+/* Mobile-optimized glass panel - less blur */
+@media (max-width: 768px) {
+  .glass-panel {
+    @apply backdrop-blur-sm;
+  }
 }
 
 .neon-border-button {
   @apply relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50;
 }
-.neon-border-button > span {
-  @apply absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#4D70FA_50%,#E2CBFF_100%)]
+
+/* Reduce animation complexity on mobile */
+@media (max-width: 768px) {
+  .neon-border-button > span {
+    @apply absolute inset-[-1000%] bg-gradient-to-r from-[#E2CBFF] via-[#4D70FA] to-[#E2CBFF];
+    animation: none; /* Disable spin on mobile for better performance */
+  }
 }
+
+@media (min-width: 769px) {
+  .neon-border-button > span {
+    @apply absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#4D70FA_50%,#E2CBFF_100%)];
+  }
+}
+
 .neon-border-button > div {
  @apply inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background px-6 text-sm font-medium text-primary-foreground backdrop-blur-3xl;
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  .neon-border-button > div {
+    @apply backdrop-blur-sm;
+  }
 }
 
 .project-image {
   max-width: 100%;
   height: auto;
+}
+
+/* Performance optimizations for low-end devices */
+.low-end-device * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.low-end-device .glass-panel {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: hsl(var(--card));
+}
+
+/* Reduce motion for accessibility and performance */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce blur effects on mobile */
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .backdrop-blur-md {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  /* Optimize transforms */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Reduce shadow complexity */
+  .shadow-2xl {
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+  }
 }

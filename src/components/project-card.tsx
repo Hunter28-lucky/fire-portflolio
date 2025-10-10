@@ -1,3 +1,5 @@
+'use client';
+
 import type { Project } from '@/types';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +8,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { useInView } from 'react-intersection-observer';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ProjectCardProps {
   project: Project;
@@ -13,19 +16,26 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
+  const isMobile = useIsMobile();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
+  // Reduce animation delay on mobile for faster feeling
+  const animationDelay = isMobile ? index * 50 : index * 150;
+
   return (
     <Card
       ref={ref}
       className={cn(
-        'glass-panel group overflow-hidden transition-all duration-500 hover:border-primary/50 hover:shadow-primary/20 hover:shadow-2xl opacity-0 transform translate-y-8',
+        'glass-panel group overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-primary/20 hover:shadow-2xl opacity-0 transform translate-y-8',
         inView && 'opacity-100 translate-y-0'
       )}
-      style={{ transitionDelay: `${index * 150}ms` }}
+      style={{ 
+        transitionDelay: `${animationDelay}ms`,
+        contentVisibility: 'auto',
+      }}
     >
       <CardHeader>
         <div className="relative mb-4 h-60 w-full overflow-hidden rounded-lg">
@@ -33,9 +43,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.imageUrl}
             alt={`${project.title} - ${project.description}`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105 project-image"
+            className="object-cover transition-transform duration-300 group-hover:scale-105 project-image"
             data-ai-hint={project.aiHint}
             loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={isMobile ? 75 : 85}
           />
         </div>
         <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>

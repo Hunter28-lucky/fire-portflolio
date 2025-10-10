@@ -13,6 +13,10 @@ const AnimatedBackground = dynamic(() => import('@/components/animated-backgroun
   ssr: false,
   loading: () => null,
 });
+const PerformanceOptimizer = dynamic(() => import('@/components/performance-optimizer'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://krishgoswami.me'),
@@ -399,6 +403,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary/40">
         <FontLoader />
+        <PerformanceOptimizer />
         <CustomCursor />
         <AnimatedBackground />
         <div className="relative z-10">{children}</div>

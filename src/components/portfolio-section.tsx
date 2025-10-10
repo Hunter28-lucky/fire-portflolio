@@ -9,14 +9,16 @@ import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { getProjects } from '@/services/project-service';
 import { projects as seedProjects } from '@/data/projects';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useIsMobile();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier loading
   });
   
   useEffect(() => {
@@ -43,6 +45,7 @@ export default function PortfolioSection() {
         'w-full max-w-7xl px-4 py-16 sm:py-24 opacity-0 transform translate-y-8',
         inView && 'opacity-100 translate-y-0'
       )}
+      style={{ contentVisibility: 'auto' }}
       aria-label="Portfolio projects"
     >
       <header className="flex flex-col items-center text-center">

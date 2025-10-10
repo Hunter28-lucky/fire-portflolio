@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Briefcase, Eye } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const titles = [
   'Top-Rated Fiverr Developer ⚡',
@@ -11,13 +12,15 @@ const titles = [
 
 export default function HeroSection() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Slightly longer interval on mobile to reduce reflows
     const interval = setInterval(() => {
       setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-    }, 3000);
+    }, isMobile ? 4000 : 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   return (
     <section 
@@ -28,7 +31,10 @@ export default function HeroSection() {
         <h1 
           className="font-headline text-5xl font-bold tracking-tighter sm:text-7xl md:text-8xl"
           style={{
-            textShadow: '0 0 10px hsl(var(--primary)/0.8), 0 0 30px hsl(var(--primary)/0.6)'
+            textShadow: isMobile 
+              ? '0 0 8px hsl(var(--primary)/0.6)' 
+              : '0 0 10px hsl(var(--primary)/0.8), 0 0 30px hsl(var(--primary)/0.6)',
+            willChange: 'auto', // Optimize rendering
           }}
         >
           Krish Goswami
