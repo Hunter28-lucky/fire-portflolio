@@ -17,12 +17,12 @@ const AnimatedBackground = dynamic(() => import('@/components/animated-backgroun
 export const metadata: Metadata = {
   metadataBase: new URL('https://krishgoswami.me'),
   title: {
-    default: 'Krish Goswami - Professional Web Developer, AI Expert & VFX Designer',
-    template: '%s | Krish Goswami',
+    default: 'Krish Goswami | Top Web Developer | AI Expert | VFX Designer | Portfolio',
+    template: '%s | Krish Goswami - Professional Developer',
   },
-  description: 'Krish Goswami - Top-Rated Developer & AI Automation Expert. Professional web development, VFX design, and AI solutions. Hire Krish Goswami for your next project.',
+  description: 'Krish Goswami (Krish Yogi) - Top-Rated Web Developer & AI Expert. 5★ Fiverr Pro | Next.js | React | Firebase | Blender VFX. Hire Krish Goswami for professional web development & AI automation.',
   keywords: [
-    // Name variations - Primary focus for ranking
+    // Name variations - Primary focus for ranking (Top Priority)
     'Krish Goswami',
     'Krish Goswami developer',
     'Krish Goswami portfolio',
@@ -30,10 +30,21 @@ export const metadata: Metadata = {
     'Krish Goswami AI expert',
     'Krish Goswami VFX designer',
     'Krish Goswami Fiverr',
+    'Krish Goswami freelancer',
+    'Krish Goswami LinkedIn',
+    'Krish Goswami GitHub',
+    'Krish Goswami website',
+    'Krish Goswami projects',
     'Krish Yogi',
     'Krish Yogi Developer',
+    'Krishna Goswami',
     'who is Krish Goswami',
     'Krish Goswami India',
+    'hire Krish Goswami',
+    'contact Krish Goswami',
+    'Krish Goswami work',
+    'Krish Goswami bio',
+    'about Krish Goswami',
     
     // Primary skills
     'AI Developer India',
@@ -84,6 +95,32 @@ export const metadata: Metadata = {
     'Modern Web Design',
     'Responsive Web Development',
     'Progressive Web Apps',
+    'ChatGPT Integration',
+    'OpenAI Developer',
+    'Machine Learning Web Apps',
+    'API Integration Expert',
+    
+    // Long-tail keywords for better ranking
+    'hire web developer India',
+    'best freelance developer',
+    'top rated Fiverr developer',
+    'affordable web development services',
+    'professional VFX designer',
+    'AI automation consultant',
+    'Next.js expert developer',
+    'React specialist India',
+    'Firebase certified developer',
+    'custom web application development',
+    'startup web developer',
+    'enterprise web solutions',
+    'mobile responsive websites',
+    'SEO optimized websites',
+    'fast loading websites',
+    'modern portfolio websites',
+    'interactive web experiences',
+    'web design and development',
+    'full service web developer',
+    'end to end web solutions',
   ],
   authors: [{ name: 'Krish Goswami', url: 'https://krishgoswami.me' }],
   creator: 'Krish Goswami',
@@ -102,29 +139,34 @@ export const metadata: Metadata = {
     apple: '/icon.png',
   },
   openGraph: {
-    type: 'website',
+    type: 'profile',
     locale: 'en_US',
     url: 'https://krishgoswami.me',
-    siteName: 'Krish Goswami - Professional Web Developer & AI Automation Expert',
-    title: 'Krish Goswami (Krish Yogi) – Top-Rated Fiverr Developer | AI Automation | VFX Design | Web Development',
-    description: 'Hire Krish Goswami for professional web development, AI automation, and VFX design services. Top-rated Fiverr developer with expertise in Next.js, React, Firebase, and Blender. Creating impactful digital solutions.',
+    siteName: 'Krish Goswami - Professional Web Developer & AI Expert',
+    title: 'Krish Goswami | Top Web Developer | AI Automation Expert | VFX Designer',
+    description: '🏆 Krish Goswami - 5-Star Rated Developer | Web Development | AI Automation | VFX Design | Next.js Expert | React Specialist | Firebase Pro | Hire for your next project!',
     images: [
       {
-        url: '/icon.png',
+        url: 'https://krishgoswami.me/icon.png',
         width: 1200,
         height: 630,
-        alt: 'Krish Goswami - Web Developer, AI Expert, VFX Designer Portfolio',
+        alt: 'Krish Goswami - Professional Web Developer, AI Expert & VFX Designer Portfolio',
+        type: 'image/png',
       },
     ],
     countryName: 'India',
+    determiner: 'the',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@KrishYogi',
     creator: '@KrishYogi',
-    title: 'Krish Goswami - Top-Rated Web Developer | AI Automation Expert | VFX Designer',
-    description: 'Professional web development, AI automation & VFX design services. Hire expert Fiverr developer for Next.js, React, Firebase projects. Portfolio & contact.',
-    images: ['/icon.png'],
+    title: 'Krish Goswami | Top Web Developer | AI Expert | VFX Designer',
+    description: '🚀 Krish Goswami - Top-Rated Developer | Next.js | React | Firebase | AI Automation | VFX Design | 5★ Fiverr Pro | Hire for professional web development',
+    images: {
+      url: 'https://krishgoswami.me/icon.png',
+      alt: 'Krish Goswami - Web Developer Portfolio',
+    },
   },
   robots: {
     index: true,
@@ -196,6 +238,66 @@ export default function RootLayout({
         <meta name="distribution" content="Global" />
         <meta name="revisit-after" content="7 days" />
         <link rel="canonical" href="https://krishgoswami.me" />
+        
+        {/* Enhanced SEO - Personal Branding */}
+        <meta name="author" content="Krish Goswami" />
+        <meta name="designer" content="Krish Goswami" />
+        <meta name="owner" content="Krish Goswami" />
+        <meta name="reply-to" content="contact@krishgoswami.me" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="target" content="all" />
+        <meta name="audience" content="all" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Krish Goswami" />
+        
+        {/* Geo Tags */}
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
+        
+        {/* Open Graph - LinkedIn Optimization */}
+        <meta property="og:site_name" content="Krish Goswami Portfolio" />
+        <meta property="og:type" content="profile" />
+        <meta property="profile:first_name" content="Krish" />
+        <meta property="profile:last_name" content="Goswami" />
+        <meta property="profile:username" content="krishgoswami" />
+        
+        {/* Article tags for better indexing */}
+        <meta property="article:author" content="Krish Goswami" />
+        <meta property="article:publisher" content="https://krishgoswami.me" />
+        
+        {/* Additional Twitter/X optimizations */}
+        <meta name="twitter:domain" content="krishgoswami.me" />
+        <meta name="twitter:url" content="https://krishgoswami.me" />
+        <meta name="twitter:label1" content="Skills" />
+        <meta name="twitter:data1" content="Web Development, AI, VFX" />
+        <meta name="twitter:label2" content="Location" />
+        <meta name="twitter:data2" content="India" />
+        
+        {/* Dublin Core Metadata for academic/professional indexing */}
+        <meta name="DC.title" content="Krish Goswami - Web Developer & AI Expert" />
+        <meta name="DC.creator" content="Krish Goswami" />
+        <meta name="DC.subject" content="Web Development, AI Automation, VFX Design" />
+        <meta name="DC.description" content="Professional portfolio of Krish Goswami - Web Developer, AI Expert, and VFX Designer" />
+        <meta name="DC.publisher" content="Krish Goswami" />
+        <meta name="DC.contributor" content="Krish Goswami" />
+        <meta name="DC.type" content="Portfolio" />
+        <meta name="DC.format" content="text/html" />
+        <meta name="DC.language" content="en" />
+        
+        {/* Rich Pins for Pinterest */}
+        <meta name="pinterest-rich-pin" content="true" />
+        
+        {/* LinkedIn specific */}
+        <meta property="og:profile:first_name" content="Krish" />
+        <meta property="og:profile:last_name" content="Goswami" />
+        <meta property="og:profile:username" content="krish-goswami" />
+        
+        {/* Preload critical assets */}
+        <link rel="preload" as="image" href="/icon.png" />
+        <link rel="preload" as="image" href="/favicon.ico" />
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary/40">
         <FontLoader />

@@ -3,6 +3,7 @@ import HeroSection from '@/components/hero-section';
 import AboutSection from '@/components/about-section';
 import ServicesSection from '@/components/services-section';
 import FAQSchema from '@/components/faq-schema';
+import AdvancedSchema from '@/components/advanced-schema';
 
 // Lazy load heavy components for better initial load time
 const SplineSection = dynamic(() => import('@/components/spline-section'), {
@@ -23,6 +24,7 @@ const AudioPlayer = dynamic(() => import('@/components/audio-player'), {
 });
 
 const Footer = dynamic(() => import('@/components/footer'));
+const SEOFooter = dynamic(() => import('@/components/seo-footer'));
 
 const MobileCta = dynamic(() => import('@/components/mobile-cta'), {
   ssr: false,
@@ -217,6 +219,7 @@ export default function Home() {
           <PortfolioSection />
           <GithubSection />
         </article>
+        <SEOFooter />
         <Footer />
       </main>
       <AudioPlayer />
@@ -246,6 +249,9 @@ export default function Home() {
       
       {/* FAQ Schema for Featured Snippets */}
       <FAQSchema />
+      
+      {/* Advanced Schema for Rich Results & Better Rankings */}
+      <AdvancedSchema />
     </>
   );
 }
