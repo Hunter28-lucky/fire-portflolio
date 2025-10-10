@@ -3,14 +3,7 @@ import HeroSection from '@/components/hero-section';
 import ServicesSection from '@/components/services-section';
 import FAQSchema from '@/components/faq-schema';
 
-// Lazy lo        <article itemScope itemType="https://schema.org/Article">
-          <HeroSection />
-          <SplineSection />
-          <ServicesSection />
-          <PortfolioSection />
-          <GithubSection />
-        </article>
-        <Footer />y components for better initial load time
+// Lazy load heavy components for better initial load time
 const SplineSection = dynamic(() => import('@/components/spline-section'), {
   loading: () => <div className="h-screen w-full bg-gradient-to-b from-background to-background/50" />,
   ssr: false, // Disable SSR for 3D component
