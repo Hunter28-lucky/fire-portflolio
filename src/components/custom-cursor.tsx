@@ -7,10 +7,18 @@ import { useIsMobile } from '@/hooks/use-mobile';
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (isMobile) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || !mounted) return;
+
+    // Add class to body to hide default cursor
+    document.body.classList.add('custom-cursor-loaded');
 
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -24,10 +32,11 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.body.classList.remove('custom-cursor-loaded');
     };
-  }, [isMobile]);
+  }, [isMobile, mounted]);
 
-  if (isMobile) {
+  if (isMobile || !mounted) {
     return null;
   }
 

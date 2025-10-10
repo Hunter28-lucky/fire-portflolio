@@ -43,15 +43,16 @@ export default function PortfolioSection() {
         'w-full max-w-7xl px-4 py-16 sm:py-24 opacity-0 transform translate-y-8',
         inView && 'opacity-100 translate-y-0'
       )}
+      aria-label="Portfolio projects"
     >
-      <div className="flex flex-col items-center text-center">
+      <header className="flex flex-col items-center text-center">
         <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
           My Recent Work
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-xl">
-          Here is a selection of projects I've built.
+          Here is a selection of projects I've built using modern technologies.
         </p>
-      </div>
+      </header>
       <Separator className="my-12 bg-primary/20" />
       {isLoading ? (
          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">

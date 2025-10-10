@@ -31,10 +31,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="relative mb-4 h-60 w-full overflow-hidden rounded-lg">
            <Image
             src={project.imageUrl}
-            alt={project.title}
+            alt={`${project.title} - ${project.description}`}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105 project-image"
             data-ai-hint={project.aiHint}
+            loading="lazy"
           />
         </div>
         <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>

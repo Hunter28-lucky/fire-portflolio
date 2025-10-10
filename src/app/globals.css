@@ -55,7 +55,10 @@
   }
   body {
     @apply bg-background text-foreground;
-    cursor: none;
+    cursor: auto; /* Show default cursor initially, custom cursor will override */
+  }
+  body.custom-cursor-loaded {
+    cursor: none; /* Hide default cursor only when custom cursor is loaded */
   }
   html {
     scroll-behavior: smooth;

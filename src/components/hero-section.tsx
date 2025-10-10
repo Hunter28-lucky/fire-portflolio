@@ -20,9 +20,13 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="flex min-h-[80svh] w-full flex-col items-center justify-center gap-8 px-4 text-center md:min-h-screen">
+    <section 
+      className="flex min-h-[80svh] w-full flex-col items-center justify-center gap-8 px-4 text-center md:min-h-screen"
+      aria-label="Hero section"
+    >
       <div className="flex flex-col items-center gap-4">
-        <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-7xl md:text-8xl"
+        <h1 
+          className="font-headline text-5xl font-bold tracking-tighter sm:text-7xl md:text-8xl"
           style={{
             textShadow: '0 0 10px hsl(var(--primary)/0.8), 0 0 30px hsl(var(--primary)/0.6)'
           }}
@@ -30,30 +34,41 @@ export default function HeroSection() {
           Krish Goswami
         </h1>
         <div className="h-8">
-            <p key={currentTitleIndex} className="animate-fade-in font-code text-lg text-primary-foreground/80 md:text-xl">
+            <p 
+              key={currentTitleIndex} 
+              className="animate-fade-in font-code text-lg text-primary-foreground/80 md:text-xl"
+              role="status"
+              aria-live="polite"
+            >
               {titles[currentTitleIndex]}
             </p>
         </div>
       </div>
       {/* Mobile layout: buttons stack vertically */}
-      <div className="flex flex-col items-center gap-4 sm:flex-row md:flex">
-        <a href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer" className="neon-border-button">
+      <nav className="flex flex-col items-center gap-4 sm:flex-row md:flex" aria-label="Primary navigation">
+        <a 
+          href="https://www.fiverr.com/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="neon-border-button"
+          aria-label="View my Fiverr profile (opens in new tab)"
+        >
           <span></span>
-          <div><Briefcase className="mr-2" /> View My Fiverr Profile</div>
+          <div><Briefcase className="mr-2" aria-hidden="true" /> View My Fiverr Profile</div>
         </a>
         <Button asChild size="lg" className="text-lg">
-          <a href="#projects" className="neon-border-button">
+          <a href="#projects" className="neon-border-button" aria-label="Explore my projects">
             <span></span>
-            <div><Eye className="mr-2" /> Explore Projects</div>
+            <div><Eye className="mr-2" aria-hidden="true" /> Explore Projects</div>
           </a>
         </Button>
         <Button asChild size="lg" className="text-lg">
-          <a href="#contact" className="neon-border-button">
+          <a href="#contact" className="neon-border-button" aria-label="Contact me for hire">
             <span></span>
-            <div><Mail className="mr-2" /> Hire Me</div>
+            <div><Mail className="mr-2" aria-hidden="true" /> Hire Me</div>
           </a>
         </Button>
-      </div>
+      </nav>
     </section>
   );
 }
