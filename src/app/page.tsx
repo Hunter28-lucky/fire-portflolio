@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import HeroSection from '@/components/hero-section';
+import AboutSection from '@/components/about-section';
 import ServicesSection from '@/components/services-section';
 import FAQSchema from '@/components/faq-schema';
 
@@ -211,6 +212,7 @@ export default function Home() {
         <article itemScope itemType="https://schema.org/Person">
           <HeroSection />
           <SplineSection />
+          <AboutSection />
           <ServicesSection />
           <PortfolioSection />
           <GithubSection />

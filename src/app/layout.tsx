@@ -17,16 +17,23 @@ const AnimatedBackground = dynamic(() => import('@/components/animated-backgroun
 export const metadata: Metadata = {
   metadataBase: new URL('https://krishgoswami.me'),
   title: {
-    default: 'Krish Goswami (Krish Yogi) – AI Automation | VFX Designer | Web Developer',
-    template: '%s | Krish Goswami Portfolio',
+    default: 'Krish Goswami - Professional Web Developer, AI Expert & VFX Designer',
+    template: '%s | Krish Goswami',
   },
-  description: 'Top-Rated Fiverr Developer specializing in AI Automation, VFX Design & Web Development. Expert in Next.js, React, Firebase. Available for hire.',
+  description: 'Krish Goswami - Top-Rated Developer & AI Automation Expert. Professional web development, VFX design, and AI solutions. Hire Krish Goswami for your next project.',
   keywords: [
-    // Name variations
+    // Name variations - Primary focus for ranking
     'Krish Goswami',
+    'Krish Goswami developer',
+    'Krish Goswami portfolio',
+    'Krish Goswami web developer',
+    'Krish Goswami AI expert',
+    'Krish Goswami VFX designer',
+    'Krish Goswami Fiverr',
     'Krish Yogi',
-    'Krish Goswami Portfolio',
     'Krish Yogi Developer',
+    'who is Krish Goswami',
+    'Krish Goswami India',
     
     // Primary skills
     'AI Developer India',
