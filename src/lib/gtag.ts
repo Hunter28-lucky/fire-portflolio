@@ -1,7 +1,8 @@
 // Google Analytics Configuration
 // Add your Google Analytics ID after deployment
 
-export const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Replace with your GA4 ID
+// Google Analytics tracking ID
+export const GA_TRACKING_ID = 'G-8808J83YNY';
 
 // Track page views
 export const pageview = (url: string) => {

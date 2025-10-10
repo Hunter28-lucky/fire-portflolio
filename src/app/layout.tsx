@@ -150,6 +150,19 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8808J83YNY"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-8808J83YNY');
+            `,
+          }}
+        />
+        
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
