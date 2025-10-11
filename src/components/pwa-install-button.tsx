@@ -21,6 +21,13 @@ export default function PWAInstallButton() {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
+    // Only show on mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (!isMobile) {
+      return; // Don't show button on desktop
+    }
+
     // Check if already installed
     const isInStandaloneMode = 
       window.matchMedia('(display-mode: standalone)').matches ||

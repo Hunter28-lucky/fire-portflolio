@@ -16,6 +16,13 @@ export default function PWAInstallPrompt() {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    // Only show on mobile devices
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (!isMobile) {
+      return; // Don't show popup on desktop
+    }
+
     // Check if already installed (standalone mode)
     const isInStandaloneMode = 
       window.matchMedia('(display-mode: standalone)').matches ||
@@ -102,87 +109,86 @@ export default function PWAInstallPrompt() {
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative mx-4 max-w-md rounded-2xl border border-white/10 bg-gradient-to-br from-gray-900 via-black to-gray-900 p-6 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300 overflow-y-auto">
+      <div className="relative w-full max-w-sm my-auto rounded-2xl border border-white/10 bg-gradient-to-br from-gray-900 via-black to-gray-900 p-5 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
         {/* Close button */}
         <button
           onClick={handleDismiss}
-          className="absolute right-4 top-4 rounded-full p-1 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+          className="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
           aria-label="Dismiss"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
 
         {/* Icon */}
-        <div className="mb-4 flex justify-center">
-          <div className="rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-4">
-            <Smartphone className="h-8 w-8 text-white" />
+        <div className="mb-3 flex justify-center">
+          <div className="rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-3">
+            <Smartphone className="h-6 w-6 text-white" />
           </div>
         </div>
 
         {/* Content */}
         <div className="text-center">
-          <h3 className="mb-2 text-xl font-bold text-white">
-            Install Krish Goswami Portfolio
+          <h3 className="mb-2 text-lg font-bold text-white">
+            Install Krish Goswami
           </h3>
-          <p className="mb-6 text-sm text-gray-300">
+          <p className="mb-4 text-xs text-gray-300">
             {isIOS
-              ? "Install this app on your home screen for a better experience and quick access!"
-              : "Get instant access to my portfolio with one tap. Install the app for a seamless experience!"}
+              ? "Add to your home screen for quick access!"
+              : "Install for quick access and offline use!"}
           </p>
 
-          {/* Features */}
-          <div className="mb-6 space-y-2 text-left">
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/20">
-                <div className="h-2 w-2 rounded-full bg-green-500" />
+          {/* Features - More compact */}
+          <div className="mb-4 space-y-1.5 text-left">
+            <div className="flex items-center gap-2 text-xs text-gray-300">
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500/20">
+                <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
               </div>
-              <span>⚡ Lightning fast loading</span>
+              <span>⚡ Lightning fast</span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20">
-                <div className="h-2 w-2 rounded-full bg-blue-500" />
+            <div className="flex items-center gap-2 text-xs text-gray-300">
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/20">
+                <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
               </div>
               <span>📱 Works offline</span>
             </div>
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/20">
-                <div className="h-2 w-2 rounded-full bg-purple-500" />
+            <div className="flex items-center gap-2 text-xs text-gray-300">
+              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500/20">
+                <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
               </div>
-              <span>🎯 Native app experience</span>
+              <span>🎯 Native experience</span>
             </div>
           </div>
 
-          {/* iOS Instructions */}
+          {/* iOS Instructions - More compact */}
           {isIOS && (
-            <div className="mb-6 rounded-lg bg-blue-500/10 p-4 text-left">
-              <p className="mb-2 text-sm font-semibold text-blue-400">
-                How to install on iOS:
+            <div className="mb-4 rounded-lg bg-blue-500/10 p-3 text-left">
+              <p className="mb-1.5 text-xs font-semibold text-blue-400">
+                How to install:
               </p>
-              <ol className="space-y-1 text-xs text-gray-300">
-                <li>1. Tap the Share button in Safari</li>
-                <li>2. Scroll down and tap "Add to Home Screen"</li>
-                <li>3. Tap "Add" in the top right corner</li>
+              <ol className="space-y-0.5 text-[10px] leading-relaxed text-gray-300">
+                <li>1. Tap Share button (bottom)</li>
+                <li>2. Tap "Add to Home Screen"</li>
+                <li>3. Tap "Add" (top right)</li>
               </ol>
             </div>
           )}
 
-          {/* Buttons */}
-          <div className="flex flex-col gap-3">
+          {/* Buttons - More compact */}
+          <div className="flex flex-col gap-2">
             {!isIOS && deferredPrompt && (
               <Button
                 onClick={handleInstallClick}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
-                size="lg"
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 h-10 text-sm"
               >
-                <Download className="mr-2 h-5 w-5" />
+                <Download className="mr-2 h-4 w-4" />
                 Install App
               </Button>
             )}
             <Button
               onClick={handleDismiss}
               variant="outline"
-              className="w-full border-white/10 text-gray-300 hover:bg-white/5"
+              className="w-full border-white/10 text-gray-300 hover:bg-white/5 h-9 text-xs"
             >
               Maybe Later
             </Button>
