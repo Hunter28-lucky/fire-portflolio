@@ -1,0 +1,47 @@
+/* 
+ * PWA Custom Styles
+ * These styles enhance the PWA experience
+ */
+
+/* Ensure smooth transitions for PWA elements */
+@media (display-mode: standalone) {
+  /* Hide scrollbars in standalone mode for cleaner look */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(77, 112, 250, 0.5);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(77, 112, 250, 0.8);
+  }
+
+  /* Add safe area padding for notched devices */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* PWA splash screen background color */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000;
+  }
+}
+
+/* Prevent pull-to-refresh in standalone mode */
+@media (display-mode: standalone) {
+  body {
+    overscroll-behavior-y: contain;
+  }
+}

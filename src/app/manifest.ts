@@ -4,11 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Krish Goswami - Professional Web Developer & AI Expert',
     short_name: 'Krish Goswami',
-    description: 'Krish Goswami - Top-Rated Developer & AI Automation Expert. Professional web development, VFX design, and AI solutions.',
+    description: 'Krish Goswami - Top-Rated Developer & AI Automation Expert. Professional web development, VFX design, and AI solutions. Get instant access to my portfolio!',
     start_url: '/',
     display: 'standalone',
     background_color: '#000000',
-    theme_color: '#000000',
+    theme_color: '#4D70FA',
     orientation: 'portrait-primary',
     scope: '/',
     categories: ['business', 'productivity', 'portfolio', 'technology'],
@@ -19,7 +19,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/icon.png',
         sizes: '192x192',
         type: 'image/png',
-        purpose: 'maskable',
+        purpose: 'any',
       },
       {
         src: '/icon.png',

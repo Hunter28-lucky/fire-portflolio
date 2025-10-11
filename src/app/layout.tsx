@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import './globals.css';
+import './pwa.css';
 import { Toaster } from '@/components/ui/toaster';
 import FontLoader from '@/components/font-loader';
 
@@ -14,6 +15,14 @@ const AnimatedBackground = dynamic(() => import('@/components/animated-backgroun
   loading: () => null,
 });
 const PerformanceOptimizer = dynamic(() => import('@/components/performance-optimizer'), {
+  ssr: false,
+  loading: () => null,
+});
+const PWAInstallPrompt = dynamic(() => import('@/components/pwa-install-prompt'), {
+  ssr: false,
+  loading: () => null,
+});
+const PWAInstallButton = dynamic(() => import('@/components/pwa-install-button'), {
   ssr: false,
   loading: () => null,
 });
@@ -406,6 +415,8 @@ export default function RootLayout({
         <PerformanceOptimizer />
         <CustomCursor />
         <AnimatedBackground />
+        <PWAInstallPrompt />
+        <PWAInstallButton />
         <div className="relative z-10">{children}</div>
         <Toaster />
       </body>
