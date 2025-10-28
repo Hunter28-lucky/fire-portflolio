@@ -39,6 +39,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'npzimcyblfzsafpkmkum.supabase.co',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'krishgoswami.me',
         port: '',
         pathname: '/**',
