@@ -1,14 +1,23 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User, getAuth } from 'firebase/auth';
+import { 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signInWithRedirect,
+  getRedirectResult,
+  signOut, 
+  onAuthStateChanged, 
+  User, 
+  getAuth 
+} from 'firebase/auth';
 import { firebaseApp } from '@/lib/firebase/client';
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
-  loading: boolean; // Add loading state
-  login: () => Promise<void>;
+  loading: boolean;
+  login: (useRedirect?: boolean) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -16,23 +25,63 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true); // Initialize loading to true
+  const [loading, setLoading] = useState(true);
   const auth = getAuth(firebaseApp);
 
   useEffect(() => {
+    // Check for redirect result on mount
+    const checkRedirectResult = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result) {
+          console.log('Login successful via redirect:', result.user.email);
+        }
+      } catch (error: any) {
+        console.error('Redirect result error:', error);
+      }
+    };
+    
+    checkRedirectResult();
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setLoading(false); // Set loading to false once auth state is determined
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [auth]);
 
-  const login = async () => {
+  const login = async (useRedirect: boolean = false) => {
     const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+    
     try {
-      await signInWithPopup(auth, provider);
+      if (useRedirect) {
+        // Use redirect for better mobile support
+        await signInWithRedirect(auth, provider);
+      } else {
+        // Use popup for desktop
+        const result = await signInWithPopup(auth, provider);
+        console.log('Login successful:', result.user.email);
+      }
     } catch (error: any) {
       console.error("Authentication failed:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      
+      // Show user-friendly error
+      if (error.code === 'auth/popup-blocked') {
+        alert('Popup was blocked! Trying redirect method...');
+        // Fallback to redirect
+        await signInWithRedirect(auth, provider);
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        alert('Login cancelled. Please try again.');
+      } else if (error.code === 'auth/unauthorized-domain') {
+        alert('This domain is not authorized. Please contact the administrator.');
+      } else {
+        alert(`Login failed: ${error.message}`);
+      }
     }
   };
 
