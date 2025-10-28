@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Download, Smartphone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { X, Download } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -14,13 +13,14 @@ export default function PWAInstallPrompt() {
   const [showPrompt, setShowPrompt] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [showIOSInstructions, setShowIOSInstructions] = useState(false);
 
   useEffect(() => {
     // Only show on mobile devices
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     if (!isMobile) {
-      return; // Don't show popup on desktop
+      return; // Don't show on desktop
     }
 
     // Check if already installed (standalone mode)
@@ -53,19 +53,15 @@ export default function PWAInstallPrompt() {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       
-      // Show prompt after a short delay (2 seconds) for better UX
-      setTimeout(() => {
-        setShowPrompt(true);
-      }, 2000);
+      // Show banner immediately (no delay)
+      setShowPrompt(true);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    // For iOS, show prompt after delay if not in standalone mode
+    // For iOS, show banner immediately if not in standalone mode
     if (iOS && !isInStandaloneMode && !hasSeenPrompt && !hasInstalled) {
-      setTimeout(() => {
-        setShowPrompt(true);
-      }, 2000);
+      setShowPrompt(true);
     }
 
     return () => {
@@ -74,7 +70,9 @@ export default function PWAInstallPrompt() {
   }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt && !isIOS) {
+    if (isIOS) {
+      // For iOS, toggle instructions
+      setShowIOSInstructions(!showIOSInstructions);
       return;
     }
 
@@ -88,13 +86,14 @@ export default function PWAInstallPrompt() {
       if (outcome === 'accepted') {
         console.log('User accepted the install prompt');
         localStorage.setItem('pwa-installed', 'true');
+        setShowPrompt(false);
       } else {
         console.log('User dismissed the install prompt');
         localStorage.setItem('pwa-prompt-dismissed', 'true');
+        setShowPrompt(false);
       }
       
       setDeferredPrompt(null);
-      setShowPrompt(false);
     }
   };
 
@@ -109,92 +108,64 @@ export default function PWAInstallPrompt() {
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300 overflow-y-auto">
-      <div className="relative w-full max-w-sm my-auto rounded-2xl border border-white/10 bg-gradient-to-br from-gray-900 via-black to-gray-900 p-5 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
-        {/* Close button */}
-        <button
-          onClick={handleDismiss}
-          className="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
-          aria-label="Dismiss"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        {/* Icon */}
-        <div className="mb-3 flex justify-center">
-          <div className="rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-3">
-            <Smartphone className="h-6 w-6 text-white" />
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="text-center">
-          <h3 className="mb-2 text-lg font-bold text-white">
-            Install Krish Goswami
-          </h3>
-          <p className="mb-4 text-xs text-gray-300">
-            {isIOS
-              ? "Add to your home screen for quick access!"
-              : "Install for quick access and offline use!"}
-          </p>
-
-          {/* Features - More compact */}
-          <div className="mb-4 space-y-1.5 text-left">
-            <div className="flex items-center gap-2 text-xs text-gray-300">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500/20">
-                <div className="h-1.5 w-1.5 rounded-full bg-green-500" />
-              </div>
-              <span>⚡ Lightning fast</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-gray-300">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/20">
-                <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-              </div>
-              <span>📱 Works offline</span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-gray-300">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-purple-500/20">
-                <div className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-              </div>
-              <span>🎯 Native experience</span>
-            </div>
-          </div>
-
-          {/* iOS Instructions - More compact */}
-          {isIOS && (
-            <div className="mb-4 rounded-lg bg-blue-500/10 p-3 text-left">
-              <p className="mb-1.5 text-xs font-semibold text-blue-400">
-                How to install:
-              </p>
-              <ol className="space-y-0.5 text-[10px] leading-relaxed text-gray-300">
-                <li>1. Tap Share button (bottom)</li>
-                <li>2. Tap "Add to Home Screen"</li>
-                <li>3. Tap "Add" (top right)</li>
-              </ol>
-            </div>
-          )}
-
-          {/* Buttons - More compact */}
-          <div className="flex flex-col gap-2">
-            {!isIOS && deferredPrompt && (
-              <Button
-                onClick={handleInstallClick}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 h-10 text-sm"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Install App
-              </Button>
-            )}
-            <Button
+    <>
+      {/* Subtle bottom banner - no blur, no blocking overlay */}
+      <div className="fixed bottom-0 left-0 right-0 z-[9999] animate-in slide-in-from-bottom-4 duration-500">
+        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-lg border border-primary/20 bg-gray-900/95 backdrop-blur-md shadow-lg">
+            {/* Close button */}
+            <button
               onClick={handleDismiss}
-              variant="outline"
-              className="w-full border-white/10 text-gray-300 hover:bg-white/5 h-9 text-xs"
+              className="absolute right-2 top-2 rounded-full p-1 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+              aria-label="Dismiss"
             >
-              Maybe Later
-            </Button>
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* Content */}
+            <div className="flex items-center gap-3 p-3 pr-10">
+              {/* Icon */}
+              <div className="flex-shrink-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500">
+                  <Download className="h-5 w-5 text-white" />
+                </div>
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-white">
+                  Install App
+                </p>
+                <p className="text-xs text-gray-300">
+                  {isIOS ? "Add to home screen for quick access" : "Get faster access & offline mode"}
+                </p>
+              </div>
+
+              {/* Action button */}
+              <button
+                onClick={handleInstallClick}
+                className="flex-shrink-0 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-2 text-sm font-medium text-white transition-all hover:from-purple-700 hover:to-pink-700 active:scale-95"
+              >
+                {isIOS ? "How?" : "Install"}
+              </button>
+            </div>
+
+            {/* iOS Instructions (expandable) */}
+            {isIOS && showIOSInstructions && (
+              <div className="border-t border-white/10 bg-blue-500/10 p-3 animate-in slide-in-from-top-2 duration-300">
+                <p className="mb-2 text-xs font-semibold text-blue-400">
+                  📱 How to install:
+                </p>
+                <ol className="space-y-1 text-xs text-gray-300 pl-4">
+                  <li>1. Tap the <strong>Share</strong> button at the bottom</li>
+                  <li>2. Scroll and tap <strong>"Add to Home Screen"</strong></li>
+                  <li>3. Tap <strong>"Add"</strong> at the top right</li>
+                </ol>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
