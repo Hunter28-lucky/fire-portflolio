@@ -1,0 +1,265 @@
+{
+  "profiles": {
+    "developer": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/Hunter28-lucky",
+        "da": 95,
+        "priority": "critical",
+        "status": "active",
+        "actions": [
+          "Add krishgoswami.me to profile bio",
+          "Update pinned repositories",
+          "Add website to repository descriptions",
+          "Create comprehensive profile README"
+        ]
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/krish-goswami-779595316",
+        "da": 98,
+        "priority": "critical",
+        "status": "active",
+        "actions": [
+          "Add website to featured section",
+          "Share portfolio projects",
+          "Write articles with backlinks",
+          "Join web dev groups"
+        ]
+      },
+      {
+        "name": "Dev.to",
+        "url": "https://dev.to/",
+        "da": 85,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Create profile",
+          "Write 4 technical articles monthly",
+          "Add canonical links",
+          "Engage with community"
+        ]
+      },
+      {
+        "name": "Hashnode",
+        "url": "https://hashnode.com/",
+        "da": 72,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Set up developer blog",
+          "Cross-post content",
+          "Build following"
+        ]
+      },
+      {
+        "name": "Medium",
+        "url": "https://medium.com/",
+        "da": 96,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Create publication",
+          "Write technical content",
+          "Add portfolio link to bio"
+        ]
+      },
+      {
+        "name": "Stack Overflow",
+        "url": "https://stackoverflow.com/",
+        "da": 91,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Complete profile",
+          "Answer 5 questions weekly",
+          "Build reputation"
+        ]
+      },
+      {
+        "name": "CodePen",
+        "url": "https://codepen.io/",
+        "da": 93,
+        "priority": "medium",
+        "status": "pending",
+        "actions": [
+          "Create 10 showcase pens",
+          "Link to portfolio",
+          "Follow other developers"
+        ]
+      },
+      {
+        "name": "Behance",
+        "url": "https://www.behance.net/",
+        "da": 93,
+        "priority": "medium",
+        "status": "pending",
+        "actions": [
+          "Upload VFX projects",
+          "Create portfolio",
+          "Link to website"
+        ]
+      },
+      {
+        "name": "Dribbble",
+        "url": "https://dribbble.com/",
+        "da": 94,
+        "priority": "medium",
+        "status": "pending",
+        "actions": [
+          "Share design shots",
+          "Build portfolio",
+          "Link to website"
+        ]
+      }
+    ],
+    "social": [
+      {
+        "name": "Twitter/X",
+        "url": "https://twitter.com/",
+        "da": 99,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Add website to bio",
+          "Share dev tips daily",
+          "Use hashtags: #webdev #nextjs #react",
+          "Engage with community"
+        ]
+      },
+      {
+        "name": "Reddit",
+        "url": "https://reddit.com/",
+        "da": 91,
+        "priority": "high",
+        "status": "pending",
+        "subreddits": ["webdev", "reactjs", "nextjs", "vfx", "Firebase"],
+        "actions": [
+          "Participate authentically",
+          "Share projects when relevant",
+          "Answer questions",
+          "Follow community rules"
+        ]
+      },
+      {
+        "name": "Quora",
+        "url": "https://www.quora.com/",
+        "da": 93,
+        "priority": "medium",
+        "status": "pending",
+        "actions": [
+          "Answer web dev questions",
+          "Create expertise space",
+          "Link to portfolio examples"
+        ]
+      },
+      {
+        "name": "YouTube",
+        "url": "https://youtube.com/",
+        "da": 100,
+        "priority": "high",
+        "status": "pending",
+        "actions": [
+          "Create channel",
+          "Upload tutorials",
+          "Portfolio walkthrough",
+          "Link in descriptions"
+        ]
+      }
+    ],
+    "directories": [
+      {
+        "name": "Google My Business",
+        "url": "https://business.google.com/",
+        "da": 100,
+        "priority": "critical",
+        "status": "pending"
+      },
+      {
+        "name": "Clutch.co",
+        "url": "https://clutch.co/",
+        "da": 79,
+        "priority": "high",
+        "status": "pending"
+      },
+      {
+        "name": "GoodFirms",
+        "url": "https://www.goodfirms.co/",
+        "da": 67,
+        "priority": "medium",
+        "status": "pending"
+      },
+      {
+        "name": "DesignRush",
+        "url": "https://www.designrush.com/",
+        "da": 66,
+        "priority": "medium",
+        "status": "pending"
+      },
+      {
+        "name": "Awwwards",
+        "url": "https://www.awwwards.com/",
+        "da": 84,
+        "priority": "high",
+        "status": "pending"
+      }
+    ],
+    "content": [
+      {
+        "name": "CSS-Tricks",
+        "url": "https://css-tricks.com/",
+        "da": 85,
+        "priority": "high",
+        "type": "guest_post",
+        "status": "pending"
+      },
+      {
+        "name": "Smashing Magazine",
+        "url": "https://www.smashingmagazine.com/",
+        "da": 90,
+        "priority": "high",
+        "type": "guest_post",
+        "status": "pending"
+      },
+      {
+        "name": "freeCodeCamp",
+        "url": "https://www.freecodecamp.org/",
+        "da": 90,
+        "priority": "high",
+        "type": "contribution",
+        "status": "pending"
+      }
+    ]
+  },
+  "tracking": {
+    "start_date": "2025-11-01",
+    "goals": {
+      "1_month": {
+        "da": "5-10",
+        "pa": "10-15",
+        "backlinks": 50,
+        "referring_domains": 20
+      },
+      "3_months": {
+        "da": "15-20",
+        "pa": "20-25",
+        "backlinks": 200,
+        "referring_domains": 50
+      },
+      "6_months": {
+        "da": "25-30",
+        "pa": "30-35",
+        "backlinks": 500,
+        "referring_domains": 100
+      }
+    },
+    "metrics": [
+      "Domain Authority (Moz)",
+      "Page Authority (Moz)",
+      "Referring Domains",
+      "Total Backlinks",
+      "Organic Traffic",
+      "Keyword Rankings"
+    ]
+  }
+}
