@@ -257,6 +257,9 @@ export default function RootLayout({
         <link rel="preload" href="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js" as="script" />
         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js" defer></script>
         
+        {/* LinkedIn Badge Script */}
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+        
         {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#4D70FA" />
         <meta name="msapplication-TileColor" content="#4D70FA" />
