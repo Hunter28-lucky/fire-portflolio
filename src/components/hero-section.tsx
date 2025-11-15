@@ -7,6 +7,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const titles = [
   'Top-Rated Fiverr Developer ⚡',
   'AI-Powered Automation Expert 🤖',
+  'Cinematic Video Editor 🎬',
   'Building Impactful Projects 💸',
 ];
 
@@ -49,6 +50,9 @@ export default function HeroSection() {
               {titles[currentTitleIndex]}
             </p>
         </div>
+        <p className="max-w-2xl text-muted-foreground text-base sm:text-lg">
+          Also known online as <strong className="text-primary-foreground">Krish Goswmi</strong>, I blend high-impact web development, AI automation, and cinematic video editing to help brands dominate every search result.
+        </p>
       </div>
       {/* Mobile layout: buttons stack vertically */}
       <nav className="flex flex-col items-center gap-4 sm:flex-row md:flex" aria-label="Primary navigation">

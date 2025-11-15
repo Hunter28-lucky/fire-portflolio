@@ -10,9 +10,9 @@ export default function AdvancedSchema() {
     "@type": "Review",
     "itemReviewed": {
       "@type": "Service",
-      "name": "Krish Goswami Web Development Services",
+      "name": "Krish Goswami (Krish Goswmi) Web Development & Video Editing Services",
       "image": "https://krishgoswami.me/icon.png",
-      "description": "Professional web development, AI automation, and VFX design services by Krish Goswami"
+      "description": "Professional web development, AI automation, cinematic video editing, and VFX design services by Krish Goswami"
     },
     "reviewRating": {
       "@type": "Rating",
@@ -35,7 +35,7 @@ export default function AdvancedSchema() {
   const aggregateRatingSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Krish Goswami",
+    "name": "Krish Goswami (Krish Goswmi)",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -49,8 +49,8 @@ export default function AdvancedSchema() {
   const offerSchema = {
     "@context": "https://schema.org",
     "@type": "Offer",
-    "name": "Web Development & AI Automation Services by Krish Goswami",
-    "description": "Professional web development, AI automation, and VFX design services",
+    "name": "Web Development, AI Automation & Video Editing by Krish Goswami",
+    "description": "Professional web development, AI automation, cinematic video editing, and VFX design services",
     "seller": {
       "@type": "Person",
       "name": "Krish Goswami"
@@ -61,8 +61,8 @@ export default function AdvancedSchema() {
     "url": "https://krishgoswami.me",
     "itemOffered": {
       "@type": "Service",
-      "name": "Custom Web Development",
-      "description": "Full-stack web development services using Next.js, React, and Firebase"
+      "name": "Custom Web & Video Experiences",
+      "description": "Full-stack web builds paired with cinematic video editing using Next.js, React, Firebase, Premiere Pro, and DaVinci Resolve"
     }
   };
 
@@ -70,8 +70,8 @@ export default function AdvancedSchema() {
   const videoSchema = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    "name": "Krish Goswami - Web Developer Portfolio Showcase",
-    "description": "Explore the portfolio and projects of Krish Goswami, a top-rated web developer specializing in AI automation and VFX design",
+    "name": "Krish Goswami (Krish Goswmi) - Web & Video Portfolio Showcase",
+    "description": "Explore the portfolio and projects of Krish Goswami, a top-rated web developer, AI automation expert, and cinematic video editor",
     "thumbnailUrl": "https://krishgoswami.me/icon.png",
     "uploadDate": "2025-01-10",
     "duration": "PT2M",
@@ -83,8 +83,8 @@ export default function AdvancedSchema() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Hire Krish Goswami for Web Development",
-    "description": "Step-by-step guide to hiring Krish Goswami for your web development project",
+    "name": "How to Hire Krish Goswami (Krish Goswmi) for Web & Video Projects",
+    "description": "Step-by-step guide to hiring Krish Goswami for your web development, AI, or video editing project",
     "image": "https://krishgoswami.me/icon.png",
     "totalTime": "PT10M",
     "step": [
@@ -99,14 +99,14 @@ export default function AdvancedSchema() {
         "@type": "HowToStep",
         "position": 2,
         "name": "Review Services",
-        "text": "Review available services including web development, AI automation, and VFX design",
+        "text": "Review available services including web development, AI automation, cinematic video editing, and VFX design",
         "url": "https://krishgoswami.me/#services"
       },
       {
         "@type": "HowToStep",
         "position": 3,
         "name": "Contact",
-        "text": "Contact Krish Goswami through the contact form or visit Fiverr profile",
+        "text": "Contact Krish Goswami (Krish Goswmi) through the contact form or visit the Fiverr profile",
         "url": "https://krishgoswami.me/#contact"
       }
     ]
@@ -116,8 +116,8 @@ export default function AdvancedSchema() {
   const courseSchema = {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Web Development with Krish Goswami",
-    "description": "Learn web development techniques and best practices from Krish Goswami's expertise in Next.js, React, and modern web technologies",
+    "name": "Web Development & Video Editing with Krish Goswami (Krish Goswmi)",
+    "description": "Learn web development, AI automation, and cinematic video editing techniques from Krish Goswami's expertise in Next.js, React, Premiere Pro, and modern creative tools",
     "provider": {
       "@type": "Person",
       "name": "Krish Goswami",
@@ -134,7 +134,7 @@ export default function AdvancedSchema() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Krish Goswami Portfolio Projects",
-    "description": "Collection of web development, AI automation, and VFX design projects by Krish Goswami",
+    "description": "Collection of web development, AI automation, cinematic video editing, and VFX design projects by Krish Goswami",
     "numberOfItems": 10,
     "itemListElement": [
       {
@@ -150,7 +150,7 @@ export default function AdvancedSchema() {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "VFX Design Projects"
+        "name": "Video Editing & VFX Design Projects"
       }
     ]
   };
@@ -162,7 +162,7 @@ export default function AdvancedSchema() {
     "@id": "https://krishgoswami.me",
     "name": "Krish Goswami - Web Development Services",
     "image": "https://krishgoswami.me/icon.png",
-    "description": "Professional web development, AI automation, and VFX design services in India",
+    "description": "Professional web development, AI automation, cinematic video editing, and VFX design services in India",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "IN",

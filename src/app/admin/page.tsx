@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +11,6 @@ const authorizedAdminEmails = ['krrishyogi18@gmail.com'];
 
 export default function AdminPage() {
   const { isAuthenticated, login, user, loading, logout } = useAuth(); // Added logout here
-  const router = useRouter();
 
   const handleLogin = async () => {
     await login();

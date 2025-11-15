@@ -10,9 +10,17 @@ export default function FAQSection() {
         "name": "What services does Krish Goswami offer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Krish Goswami offers professional web development, AI automation solutions, VFX design, UI/UX design, and full-stack development services. Specializing in Next.js, React, Firebase, TypeScript, and Blender VFX."
+          "text": "Krish Goswami (also searched as Krish Goswmi) offers professional web development, AI automation solutions, cinematic video editing, VFX design, UI/UX design, and full-stack development services. Specializing in Next.js, React, Firebase, TypeScript, Blender VFX, Premiere Pro, and DaVinci Resolve."
         }
       },
+            {
+              "@type": "Question",
+              "name": "Does Krish Goswmi provide video editing services?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Under the Krish Goswmi moniker, Krish delivers cinematic video editing, color grading, and motion design for product launches, SaaS demos, and personal branding campaigns using Premiere Pro, After Effects, and DaVinci Resolve."
+              }
+            },
       {
         "@type": "Question",
         "name": "How can I hire Krish Goswami for a project?",

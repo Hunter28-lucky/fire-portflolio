@@ -53,7 +53,7 @@ export default function PortfolioSection() {
           My Recent Work
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-xl">
-          Here is a selection of projects I've built using modern technologies.
+          Here is a selection of projects I&apos;ve built using modern technologies.
         </p>
       </header>
       <Separator className="my-12 bg-primary/20" />

@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Eye, Mail, Briefcase, MessageSquare } from 'lucide-react';
+import { Eye, Mail, Briefcase } from 'lucide-react';
 import {
   Sheet,
   SheetContent,

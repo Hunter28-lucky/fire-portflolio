@@ -1,8 +1,6 @@
 'use server';
       
       import {
-        SendEmailInputSchema,
-        SendEmailOutputSchema,
         type SendEmailInput,
         type SendEmailOutput,
       } from '@/types/email';
@@ -31,7 +29,7 @@
             from: fromSender,
             to: toEmail,
             subject: 'Message from contact form',
-            reply_to: fromEmail,
+            replyTo: fromEmail,
             react: ContactFormEmail({
               message,
               name,

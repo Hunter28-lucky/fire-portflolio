@@ -9,8 +9,9 @@
  * - TopProjectsOutput - The return type for the getTopProjects function.
  */
 
+// @ts-ignore - Genkit types may not be available at compile time
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import {z} from 'zod';
 
 const TopProjectsInputSchema = z.object({
   freelancerSkills: z
@@ -62,7 +63,7 @@ const getTopProjectsFlow = ai.defineFlow(
     inputSchema: TopProjectsInputSchema,
     outputSchema: TopProjectsOutputSchema,
   },
-  async input => {
+  async (input: TopProjectsInput) => {
     const {output} = await prompt(input);
     return output!;
   }

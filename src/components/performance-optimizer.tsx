@@ -19,7 +19,7 @@ export default function PerformanceOptimizer() {
       const cpuCores = navigator.hardwareConcurrency || 2;
       
       // Check for device memory (if available)
-      const deviceMemory = (navigator as any).deviceMemory || 4;
+      const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory || 4;
       
       return isMobile && (cpuCores <= 4 || deviceMemory <= 4);
     };

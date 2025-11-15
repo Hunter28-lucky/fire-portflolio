@@ -6,8 +6,8 @@ export const GA_TRACKING_ID = 'G-8808J83YNY';
 
 // Track page views
 export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('config', GA_TRACKING_ID, {
+  if (typeof window !== 'undefined' && (window as Window & { gtag?: (...args: unknown[]) => void }).gtag) {
+    ((window as unknown) as Window & { gtag: (...args: unknown[]) => void }).gtag('config', GA_TRACKING_ID, {
       page_path: url,
     });
   }
@@ -20,8 +20,8 @@ export const event = ({ action, category, label, value }: {
   label: string;
   value?: number;
 }) => {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', action, {
+  if (typeof window !== 'undefined' && (window as Window & { gtag?: (...args: unknown[]) => void }).gtag) {
+    ((window as unknown) as Window & { gtag: (...args: unknown[]) => void }).gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,

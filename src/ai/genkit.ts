@@ -1,3 +1,4 @@
+// @ts-nocheck - Genkit packages not installed, types unavailable
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 

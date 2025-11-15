@@ -26,13 +26,13 @@ export default function PWAInstallPrompt() {
     // Check if already installed (standalone mode)
     const isInStandaloneMode = 
       window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as any).standalone ||
+      (window.navigator as Navigator & { standalone?: boolean }).standalone ||
       document.referrer.includes('android-app://');
 
     setIsStandalone(isInStandaloneMode);
 
     // Check if iOS
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as Window & { MSStream?: unknown }).MSStream;
     setIsIOS(iOS);
 
     // Check if user has already dismissed or installed
@@ -158,8 +158,8 @@ export default function PWAInstallPrompt() {
                 </p>
                 <ol className="space-y-1 text-xs text-gray-300 pl-4">
                   <li>1. Tap the <strong>Share</strong> button at the bottom</li>
-                  <li>2. Scroll and tap <strong>"Add to Home Screen"</strong></li>
-                  <li>3. Tap <strong>"Add"</strong> at the top right</li>
+                  <li>2. Scroll and tap <strong>&ldquo;Add to Home Screen&rdquo;</strong></li>
+                  <li>3. Tap <strong>&ldquo;Add&rdquo;</strong> at the top right</li>
                 </ol>
               </div>
             )}

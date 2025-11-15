@@ -31,8 +31,8 @@ const ContactFormEmail = ({
           <Heading>You received the following message from the contact form</Heading>
           <Text>{message}</Text>
           <Hr />
-          <Text>The sender's name is: {name}</Text>
-          <Text>The sender's email is: {fromEmail}</Text>
+          <Text>The sender&apos;s name is: {name}</Text>
+          <Text>The sender&apos;s email is: {fromEmail}</Text>
         </Section>
       </Container>
     </Body>

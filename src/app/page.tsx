@@ -36,7 +36,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": ["Person", "CreativeWork"],
     "name": "Krish Goswami",
-    "alternateName": ["Krish Yogi", "Krish", "Krishna Goswami"],
+    "alternateName": ["Krish Yogi", "Krish", "Krishna Goswami", "Krish Goswmi"],
     "url": "https://krishgoswami.me",
     "image": "https://krishgoswami.me/icon.png",
     "sameAs": [
@@ -45,8 +45,8 @@ export default function Home() {
       "https://www.fiverr.com/",
       "https://krishgoswami.me"
     ],
-    "jobTitle": ["AI Automation Expert", "VFX Designer", "Web Developer"],
-    "description": "Top-Rated Fiverr Developer specializing in AI automation, VFX design, and modern web development. Expert in Next.js, React, Firebase, and Blender.",
+    "jobTitle": ["AI Automation Expert", "VFX Designer", "Web Developer", "Cinematic Video Editor"],
+    "description": "Top-Rated Fiverr Developer known as Krish Goswmi, specializing in AI automation, cinematic video editing, VFX design, and modern web development. Expert in Next.js, React, Firebase, Blender, Premiere Pro, and DaVinci Resolve.",
     "knowsAbout": [
       "AI Automation",
       "Artificial Intelligence",
@@ -60,6 +60,11 @@ export default function Home() {
       "Blender",
       "3D Animation",
       "Video Editing",
+      "Cinematic Video Editing",
+      "Premiere Pro",
+      "DaVinci Resolve",
+      "After Effects",
+      "Color Grading",
       "UI/UX Design",
       "Full Stack Development",
       "Tailwind CSS",
@@ -67,7 +72,7 @@ export default function Home() {
     ],
     "hasOccupation": {
       "@type": "Occupation",
-      "name": "Web Developer & AI Automation Expert",
+      "name": "Web Developer, AI Automation Expert & Video Editor",
       "occupationLocation": {
         "@type": "Country",
         "name": "India"
@@ -92,7 +97,7 @@ export default function Home() {
     "@type": "WebSite",
     "name": "Krish Goswami Portfolio",
     "url": "https://krishgoswami.me",
-    "description": "Portfolio showcasing AI automation, VFX design, and web development projects",
+    "description": "Portfolio showcasing AI automation, cinematic video editing, VFX design, and web development projects",
     "author": {
       "@type": "Person",
       "name": "Krish Goswami"
@@ -102,11 +107,11 @@ export default function Home() {
   const professionalServiceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Krish Goswami - Web Development & VFX Services",
+    "name": "Krish Goswami - Web Development, Video Editing & VFX Services",
     "alternateName": "Krish Yogi Development Services",
     "image": "https://krishgoswami.me/icon.png",
     "logo": "https://krishgoswami.me/icon.png",
-    "description": "Professional AI automation, VFX design, and web development services. Specializing in Next.js, React, Firebase development, Blender VFX, and custom automation solutions.",
+    "description": "Professional AI automation, cinematic video editing, VFX design, and web development services. Specializing in Next.js, React, Firebase development, Blender VFX, Premiere Pro storytelling, and custom automation solutions.",
     "priceRange": "$$",
     "url": "https://krishgoswami.me",
     "telephone": "+91-XXX-XXX-XXXX",
@@ -128,6 +133,7 @@ export default function Home() {
       "Web Development",
       "AI Automation",
       "VFX Design",
+      "Cinematic Video Editing & Post-Production",
       "UI/UX Design",
       "Full Stack Development"
     ],
@@ -182,7 +188,7 @@ export default function Home() {
     "alternateName": "Krish Yogi",
     "url": "https://krishgoswami.me",
     "logo": "https://krishgoswami.me/icon.png",
-    "description": "Professional web development, AI automation, and VFX design services by top-rated developer",
+    "description": "Professional web development, AI automation, cinematic video editing, and VFX design services by top-rated developer",
     "sameAs": [
       "https://www.linkedin.com/in/krish-goswami-779595316",
       "https://github.com/Hunter28-lucky",

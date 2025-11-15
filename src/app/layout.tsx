@@ -30,10 +30,10 @@ const PWAInstallButton = dynamic(() => import('@/components/pwa-install-button')
 export const metadata: Metadata = {
   metadataBase: new URL('https://krishgoswami.me'),
   title: {
-    default: 'Krish Goswami | Top Web Developer | AI Expert | VFX Designer | Portfolio',
+    default: 'Krish Goswami (Krish Goswmi) | Top Web Developer | AI Expert | Video Editor | VFX Designer',
     template: '%s | Krish Goswami - Professional Developer',
   },
-  description: 'Krish Goswami (Krish Yogi) - Top-Rated Web Developer & AI Expert. 5★ Fiverr Pro | Next.js | React | Firebase | Blender VFX. Hire Krish Goswami for professional web development & AI automation.',
+  description: 'Krish Goswami (aka Krish Goswmi / Krish Yogi) - Top-Rated Web Developer, AI Expert & Cinematic Video Editor. 5★ Fiverr Pro | Next.js | React | Firebase | Blender VFX | Premiere Pro. Hire Krish Goswami for premium web, AI automation, and video editing.',
   keywords: [
     // Name variations - Primary focus for ranking (Top Priority)
     'Krish Goswami',
@@ -58,6 +58,14 @@ export const metadata: Metadata = {
     'Krish Goswami work',
     'Krish Goswami bio',
     'about Krish Goswami',
+    // Misspelling variations captured for branded search dominance
+    'Krish Goswmi',
+    'Krish Goswmi developer',
+    'Krish Goswmi portfolio',
+    'Krish Goswmi video editor',
+    'hire Krish Goswmi',
+    'Krish Goswmi Fiverr',
+    'Krish Goswmi AI expert',
     
     // Primary skills
     'AI Developer India',
@@ -65,6 +73,9 @@ export const metadata: Metadata = {
     'VFX Designer India',
     'Web Developer India',
     'Automation Engineer',
+    'Video Editor India',
+    'Cinematic Video Editor',
+    'Post Production Expert',
     
     // Platforms & Technologies
     'Top Rated Fiverr Developer',
@@ -134,6 +145,10 @@ export const metadata: Metadata = {
     'web design and development',
     'full service web developer',
     'end to end web solutions',
+    'Krish Goswmi video editing services',
+    'hire Krish Goswmi video editor',
+    'cinematic web and video experiences',
+    'full stack developer and video editor',
   ],
   authors: [{ name: 'Krish Goswami', url: 'https://krishgoswami.me' }],
   creator: 'Krish Goswami',
@@ -155,9 +170,9 @@ export const metadata: Metadata = {
     type: 'profile',
     locale: 'en_US',
     url: 'https://krishgoswami.me',
-    siteName: 'Krish Goswami - Professional Web Developer & AI Expert',
-    title: 'Krish Goswami | Top Web Developer | AI Automation Expert | VFX Designer',
-    description: '🏆 Krish Goswami - 5-Star Rated Developer | Web Development | AI Automation | VFX Design | Next.js Expert | React Specialist | Firebase Pro | Hire for your next project!',
+    siteName: 'Krish Goswami - Web Developer, AI Expert & Video Editor',
+    title: 'Krish Goswami (Krish Goswmi) | Web Developer | AI Automation Expert | Video Editor | VFX Designer',
+    description: '🏆 Krish Goswami (Krish Goswmi) - 5-Star Developer | Web Development | AI Automation | Cinematic Video Editing | VFX Design | Next.js Expert | React Specialist | Firebase Pro | Hire for your next project!',
     images: [
       {
         url: 'https://krishgoswami.me/icon.png',
@@ -175,7 +190,7 @@ export const metadata: Metadata = {
     site: '@KrishYogi',
     creator: '@KrishYogi',
     title: 'Krish Goswami | Top Web Developer | AI Expert | VFX Designer',
-    description: '🚀 Krish Goswami - Top-Rated Developer | Next.js | React | Firebase | AI Automation | VFX Design | 5★ Fiverr Pro | Hire for professional web development',
+    description: '🚀 Krish Goswami (Krish Goswmi) - Top-Rated Developer | Next.js | React | Firebase | AI Automation | Cinematic Video Editing | VFX Design | 5★ Fiverr Pro | Hire for professional web development and post-production',
     images: {
       url: 'https://krishgoswami.me/icon.png',
       alt: 'Krish Goswami - Web Developer Portfolio',
@@ -285,15 +300,15 @@ export default function RootLayout({
         <meta name="twitter:domain" content="krishgoswami.me" />
         <meta name="twitter:url" content="https://krishgoswami.me" />
         <meta name="twitter:label1" content="Skills" />
-        <meta name="twitter:data1" content="Web Development, AI, VFX" />
+        <meta name="twitter:data1" content="Web Development, AI, Video Editing, VFX" />
         <meta name="twitter:label2" content="Location" />
         <meta name="twitter:data2" content="India" />
         
         {/* Dublin Core Metadata for academic/professional indexing */}
-        <meta name="DC.title" content="Krish Goswami - Web Developer & AI Expert" />
+        <meta name="DC.title" content="Krish Goswami (Krish Goswmi) - Web Developer, AI Expert & Video Editor" />
         <meta name="DC.creator" content="Krish Goswami" />
-        <meta name="DC.subject" content="Web Development, AI Automation, VFX Design" />
-        <meta name="DC.description" content="Professional portfolio of Krish Goswami - Web Developer, AI Expert, and VFX Designer" />
+        <meta name="DC.subject" content="Web Development, AI Automation, Video Editing, VFX Design" />
+        <meta name="DC.description" content="Professional portfolio of Krish Goswami (Krish Goswmi) - Web Developer, AI Expert, Cinematic Video Editor, and VFX Designer" />
         <meta name="DC.publisher" content="Krish Goswami" />
         <meta name="DC.contributor" content="Krish Goswami" />
         <meta name="DC.type" content="Portfolio" />
@@ -350,12 +365,12 @@ export default function RootLayout({
                 "@type": "WebPage",
                 "@id": "https://krishgoswami.me",
                 "url": "https://krishgoswami.me",
-                "name": "Krish Goswami - Web Developer & AI Expert",
+                "name": "Krish Goswami (Krish Goswmi) - Web Developer, AI Expert & Video Editor",
                 "isPartOf": { "@id": "https://krishgoswami.me/#website" },
                 "primaryImageOfPage": { "@id": "https://krishgoswami.me/#primaryimage" },
                 "datePublished": "2024-01-01T00:00:00+00:00",
                 "dateModified": "2025-10-10T00:00:00+00:00",
-                "description": "Krish Goswami - Top-Rated Web Developer & AI Automation Expert",
+                "description": "Krish Goswami (Krish Goswmi) - Top-Rated Web Developer, AI Automation Expert & Cinematic Video Editor",
                 "breadcrumb": { "@id": "https://krishgoswami.me/#breadcrumb" },
                 "inLanguage": "en-US",
                 "potentialAction": [
@@ -391,8 +406,8 @@ export default function RootLayout({
                 "@type": "WebSite",
                 "@id": "https://krishgoswami.me/#website",
                 "url": "https://krishgoswami.me",
-                "name": "Krish Goswami",
-                "description": "Professional Web Developer & AI Expert",
+                "name": "Krish Goswami (Krish Goswmi)",
+                "description": "Professional Web Developer, AI Expert & Video Editor",
                 "publisher": { "@id": "https://krishgoswami.me/#person" },
                 "potentialAction": [
                   {

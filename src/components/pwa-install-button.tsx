@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Download, Check } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -31,7 +31,7 @@ export default function PWAInstallButton() {
     // Check if already installed
     const isInStandaloneMode = 
       window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as any).standalone ||
+      (window.navigator as Navigator & { standalone?: boolean }).standalone ||
       document.referrer.includes('android-app://');
 
     setIsInstalled(isInStandaloneMode);
@@ -50,7 +50,7 @@ export default function PWAInstallButton() {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     // Check if iOS
-    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as Window & { MSStream?: unknown }).MSStream;
     if (iOS && !isInStandaloneMode) {
       setShowButton(true);
     }

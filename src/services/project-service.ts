@@ -25,7 +25,8 @@ async function seedDatabase() {
     const batch = writeBatch(db);
     seedProjects.forEach(project => {
       // Firestore will auto-generate IDs, so we don't use the local ones.
-      const {id, ...projectData} = project;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { id, ...projectData } = project;
       const docRef = doc(collection(db, PROJECTS_COLLECTION));
       batch.set(docRef, projectData);
     });

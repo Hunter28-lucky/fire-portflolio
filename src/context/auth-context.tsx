@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (result) {
           console.log('Login successful via redirect:', result.user.email);
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error('Redirect result error:', error);
       }
     };
@@ -65,22 +65,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const result = await signInWithPopup(auth, provider);
         console.log('Login successful:', result.user.email);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Authentication failed:", error);
-      console.error("Error code:", error.code);
-      console.error("Error message:", error.message);
+      const firebaseError = error as { code?: string; message?: string };
+      console.error("Error code:", firebaseError.code);
+      console.error("Error message:", firebaseError.message);
       
       // Show user-friendly error
-      if (error.code === 'auth/popup-blocked') {
+      if (firebaseError.code === 'auth/popup-blocked') {
         alert('Popup was blocked! Trying redirect method...');
         // Fallback to redirect
         await signInWithRedirect(auth, provider);
-      } else if (error.code === 'auth/popup-closed-by-user') {
+      } else if (firebaseError.code === 'auth/popup-closed-by-user') {
         alert('Login cancelled. Please try again.');
-      } else if (error.code === 'auth/unauthorized-domain') {
+      } else if (firebaseError.code === 'auth/unauthorized-domain') {
         alert('This domain is not authorized. Please contact the administrator.');
       } else {
-        alert(`Login failed: ${error.message}`);
+        alert(`Login failed: ${firebaseError.message || 'Unknown error'}`);
       }
     }
   };

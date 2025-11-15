@@ -9,5 +9,6 @@ export type SendEmailInput = z.infer<typeof SendEmailInputSchema>;
 
 export const SendEmailOutputSchema = z.object({
   success: z.boolean().describe('Whether the email was sent successfully.'),
+  error: z.string().optional().describe('Error message if sending failed.'),
 });
 export type SendEmailOutput = z.infer<typeof SendEmailOutputSchema>;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Code, Sparkles, Palette, Zap, Brain, Globe } from 'lucide-react';
+import { Code, Sparkles, Palette, Zap, Brain, Globe, Clapperboard } from 'lucide-react';
 import Link from 'next/link';
 
 const services = [
@@ -17,6 +17,13 @@ const services = [
     description: 'Stunning visual effects and 3D animations using Blender and industry-standard tools.',
     link: 'https://www.blender.org/features/vfx/',
     linkText: 'Explore VFX'
+  },
+  {
+    icon: Clapperboard,
+    title: 'Video Editing & Post-Production',
+    description: 'Cinematic storytelling, color grading, and social-ready edits crafted in Premiere Pro and DaVinci Resolve.',
+    link: 'https://www.adobe.com/products/premiere.html',
+    linkText: 'See Premiere Pro'
   },
   {
     icon: Code,
