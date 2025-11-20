@@ -193,3 +193,17 @@
 spline-viewer #logo {
   display: none !important;
 }
+
+/* Hide "Built with Spline" badge */
+spline-viewer::part(logo) {
+  display: none !important;
+}
+
+spline-viewer [id*="logo"],
+spline-viewer [class*="logo"],
+spline-viewer a[href*="spline.design"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
