@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function SplineSection() {
   const isMobile = useIsMobile();
   const [shouldLoad, setShouldLoad] = useState(false);
+  const viewerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Delay loading on mobile for better initial performance
@@ -15,6 +16,33 @@ export default function SplineSection() {
 
     return () => clearTimeout(timer);
   }, [isMobile]);
+
+  useEffect(() => {
+    if (!shouldLoad) return;
+
+    // Remove Spline branding after viewer loads
+    const removeSplineBranding = () => {
+      const viewer = viewerRef.current;
+      if (!viewer) return;
+
+      // Access shadow DOM
+      const shadowRoot = (viewer as any).shadowRoot;
+      if (shadowRoot) {
+        const logo = shadowRoot.querySelector('#logo');
+        if (logo) {
+          (logo as HTMLElement).style.display = 'none';
+        }
+      }
+    };
+
+    // Try multiple times as the viewer might load asynchronously
+    const intervals = [500, 1000, 2000, 3000];
+    const timers = intervals.map(delay => 
+      setTimeout(removeSplineBranding, delay)
+    );
+
+    return () => timers.forEach(clearTimeout);
+  }, [shouldLoad]);
 
   // Don't render 3D on very small screens or until ready
   if (!shouldLoad || (typeof window !== 'undefined' && window.innerWidth < 640)) {
@@ -33,6 +61,7 @@ export default function SplineSection() {
       style={{ contentVisibility: 'auto' }}
     >
       <spline-viewer
+        ref={viewerRef as any}
         loading-anim-type="spinner-small-dark"
         url="https://prod.spline.design/XVb4L3YwyNlw6ppz/scene.splinecode"
       />
