@@ -188,3 +188,8 @@
     box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
   }
 }
+
+/* Hide Spline logo watermark */
+spline-viewer #logo {
+  display: none !important;
+}
