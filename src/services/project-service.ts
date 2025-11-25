@@ -42,7 +42,14 @@ export async function getProjects(): Promise<Project[]> {
   try {
     const projectsCollection = collection(db, PROJECTS_COLLECTION);
     const snapshot = await getDocs(projectsCollection);
-    return snapshot.docs.map(doc => ({id: doc.id, ...doc.data()} as Project));
+    const projects = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()} as Project));
+    
+    // Sort by order field (ascending), projects without order go to the end
+    return projects.sort((a, b) => {
+      const orderA = a.order ?? 999999;
+      const orderB = b.order ?? 999999;
+      return orderA - orderB;
+    });
   } catch (error) {
     console.error('Could not fetch projects from Firestore. Error:', error);
     // Return an empty array on failure to prevent crashes.

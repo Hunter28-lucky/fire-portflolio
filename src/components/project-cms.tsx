@@ -66,13 +66,15 @@ export default function ProjectCms() {
   };
 
   const handleAddNewProject = async () => {
+    const maxOrder = projects.reduce((max, p) => Math.max(max, p.order ?? 0), 0);
     const newProject: Omit<Project, 'id'> = {
       title: 'New Project',
       description: 'A new awesome project.',
       imageUrl: 'https://placehold.co/600x400',
       tags: ['Web'],
       link: '#',
-      aiHint: 'new project'
+      aiHint: 'new project',
+      order: maxOrder + 1
     };
     try {
       const addedProject = await addProject(newProject);
@@ -177,6 +179,17 @@ export default function ProjectCms() {
                   value={project.link}
                   onBlur={(e) => handleProjectChange(project.id, 'link', e.target.value)}
                   onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, link: e.target.value} : p))}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor={`order-${project.id}`}>Display Order</Label>
+                <Input
+                  id={`order-${project.id}`}
+                  type="number"
+                  value={project.order ?? 0}
+                  onBlur={(e) => handleProjectChange(project.id, 'order', parseInt(e.target.value) || 0)}
+                  onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, order: parseInt(e.target.value) || 0} : p))}
+                  placeholder="1, 2, 3..."
                 />
               </div>
               <div className="space-y-2 col-span-full">

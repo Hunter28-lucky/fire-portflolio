@@ -10,7 +10,8 @@ export const projects: Project[] = [
     imageUrl: 'https://placehold.co/600x400',
     tags: ['Web', 'Portfolio', 'Vercel'],
     link: 'https://vfx-two.vercel.app/',
-    aiHint: 'visual effects'
+    aiHint: 'visual effects',
+    order: 1
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ export const projects: Project[] = [
     imageUrl: 'https://placehold.co/600x400',
     tags: ['E-commerce', 'Mobile', 'Vercel'],
     link: 'https://shree-sawariya-elegance-mobile.vercel.app/',
-    aiHint: 'fashion store'
+    aiHint: 'fashion store',
+    order: 2
   },
   {
     id: '3',
@@ -28,7 +30,8 @@ export const projects: Project[] = [
     imageUrl: 'https://placehold.co/600x400',
     tags: ['Game', 'Web', 'Vercel'],
     link: 'https://bomboclatmines-a9fy.vercel.app/',
-    aiHint: 'web game'
+    aiHint: 'web game',
+    order: 3
   },
   {
     id: '4',
@@ -37,7 +40,8 @@ export const projects: Project[] = [
     imageUrl: 'https://placehold.co/600x400',
     tags: ['Web', 'Business', 'GitHub Pages'],
     link: 'https://hunter28-lucky.github.io/new-website-/',
-    aiHint: 'corporate website'
+    aiHint: 'corporate website',
+    order: 4
   },
   {
     id: '5',
@@ -46,7 +50,8 @@ export const projects: Project[] = [
     imageUrl: 'https://placehold.co/600x400',
     tags: ['Web', 'Portfolio', 'GitHub Pages'],
     link: 'https://hunter28-lucky.github.io/my-portfolio/',
-    aiHint: 'developer portfolio'
+    aiHint: 'developer portfolio',
+    order: 5
   }
 ];
 
