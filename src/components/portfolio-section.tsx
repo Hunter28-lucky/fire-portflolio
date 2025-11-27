@@ -14,6 +14,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 export default function PortfolioSection() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const isMobile = useIsMobile();
 
   const { ref, inView } = useInView({
@@ -37,6 +38,14 @@ export default function PortfolioSection() {
     fetchProjects();
   }, []);
 
+  // Get unique categories from projects
+  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category).filter(Boolean)))] as string[];
+  
+  // Filter projects by selected category
+  const filteredProjects = selectedCategory === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === selectedCategory);
+
   return (
     <section 
       id="projects"
@@ -57,6 +66,24 @@ export default function PortfolioSection() {
         </p>
       </header>
       <Separator className="my-12 bg-primary/20" />
+      
+      {/* Category Filter */}
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={cn(
+              "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+              selectedCategory === category
+                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/50"
+                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            )}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
       {isLoading ? (
          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
             {[...Array(4)].map((_, i) => (
@@ -67,9 +94,13 @@ export default function PortfolioSection() {
               </div>
             ))}
          </div>
+      ) : filteredProjects.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground text-lg">No projects found in this category.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index}/>
           ))}
         </div>

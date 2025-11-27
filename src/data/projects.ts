@@ -11,7 +11,8 @@ export const projects: Project[] = [
     tags: ['Web', 'Portfolio', 'Vercel'],
     link: 'https://vfx-two.vercel.app/',
     aiHint: 'visual effects',
-    order: 1
+    order: 1,
+    category: 'Web Development'
   },
   {
     id: '2',
@@ -21,7 +22,8 @@ export const projects: Project[] = [
     tags: ['E-commerce', 'Mobile', 'Vercel'],
     link: 'https://shree-sawariya-elegance-mobile.vercel.app/',
     aiHint: 'fashion store',
-    order: 2
+    order: 2,
+    category: 'E-commerce'
   },
   {
     id: '3',
@@ -31,7 +33,8 @@ export const projects: Project[] = [
     tags: ['Game', 'Web', 'Vercel'],
     link: 'https://bomboclatmines-a9fy.vercel.app/',
     aiHint: 'web game',
-    order: 3
+    order: 3,
+    category: 'Games'
   },
   {
     id: '4',
@@ -41,7 +44,8 @@ export const projects: Project[] = [
     tags: ['Web', 'Business', 'GitHub Pages'],
     link: 'https://hunter28-lucky.github.io/new-website-/',
     aiHint: 'corporate website',
-    order: 4
+    order: 4,
+    category: 'Web Development'
   },
   {
     id: '5',
@@ -51,7 +55,8 @@ export const projects: Project[] = [
     tags: ['Web', 'Portfolio', 'GitHub Pages'],
     link: 'https://hunter28-lucky.github.io/my-portfolio/',
     aiHint: 'developer portfolio',
-    order: 5
+    order: 5,
+    category: 'Web Development'
   }
 ];
 

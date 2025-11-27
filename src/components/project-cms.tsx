@@ -74,7 +74,8 @@ export default function ProjectCms() {
       tags: ['Web'],
       link: '#',
       aiHint: 'new project',
-      order: maxOrder + 1
+      order: maxOrder + 1,
+      category: 'Web Development'
     };
     try {
       const addedProject = await addProject(newProject);
@@ -191,6 +192,24 @@ export default function ProjectCms() {
                   onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, order: parseInt(e.target.value) || 0} : p))}
                   placeholder="1, 2, 3..."
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor={`category-${project.id}`}>Category</Label>
+                <select
+                  id={`category-${project.id}`}
+                  value={project.category ?? 'Web Development'}
+                  onBlur={(e) => handleProjectChange(project.id, 'category', e.target.value)}
+                  onChange={(e) => setProjects(projects.map(p => p.id === project.id ? {...p, category: e.target.value} : p))}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <option value="Web Development">Web Development</option>
+                  <option value="E-commerce">E-commerce</option>
+                  <option value="Games">Games</option>
+                  <option value="Mobile Apps">Mobile Apps</option>
+                  <option value="AI/Automation">AI/Automation</option>
+                  <option value="VFX/Video">VFX/Video</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <div className="space-y-2 col-span-full">
                 <Label htmlFor={`description-${project.id}`}>Description</Label>

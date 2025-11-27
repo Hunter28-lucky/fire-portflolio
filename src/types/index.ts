@@ -7,4 +7,5 @@ export interface Project {
   link: string;
   aiHint?: string;
   order?: number;
+  category?: string;
 }
