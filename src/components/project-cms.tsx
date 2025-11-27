@@ -473,6 +473,7 @@ export default function ProjectCms() {
               </CardContent>
             </Card>
           ))}
+        </div>
       </div>
     </div>
   );
